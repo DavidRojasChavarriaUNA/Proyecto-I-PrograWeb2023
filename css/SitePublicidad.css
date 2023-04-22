@@ -1,0 +1,256 @@
+body header, body footer, #menu-responsivo .uk-offcanvas-bar{
+    background-color: #000000 !important;
+}
+
+#header{
+    position: fixed; 
+    top: 0;
+    width: 100%;
+    z-index: 1001;
+    margin-bottom: 100px;
+}
+
+.uk-navbar-container{
+    z-index: 1002;
+}
+
+#footer{
+    min-height: 80px;
+}
+
+main{
+    margin-top: 90px;
+    margin-bottom: 10px;
+}
+
+.text-white{
+    color: #ffffff !important;
+}
+
+.text-menu{
+    color: #bababa !important;
+}
+
+.uk-parent:hover>a {
+    color: #ffffff !important;
+    font-weight: bold;
+}
+
+.texto-negro, .MarcarEnNegro:hover {
+    color: #000000 !important;
+}
+
+.img-responsive{
+    width: 100%;
+}
+
+.NoDecoration, .NoDecoration:hover{
+    text-decoration: none;
+}
+
+.barra-negra, .barra-roja{
+    min-height: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.texto-grande{
+    font-size: larger !important;
+    min-height: auto !important;
+}
+
+.bordesLaterales{
+    border-left: 1px solid;
+    border-right: 1px solid;
+}
+
+.scroll{
+    overflow: auto;
+}
+
+.scroll-x{
+    overflow-x: auto;
+}
+
+.scroll-y{
+    overflow-y: auto;
+}
+
+.logo{
+    max-width: 150px;
+}
+
+.copy-right{
+    margin: 0;
+    padding: 10px 0;
+}
+
+#footer div.uk-text-center, #footer nav{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px #bababa solid;
+}
+
+#footer nav .uk-navbar-nav>li>a{
+    min-height: unset;
+}
+
+#footer nav .uk-navbar-nav>li:first-child{
+    border-right: 1px #bababa solid;
+}
+#footer nav .uk-navbar-nav>li:last-child{
+    border-left: 1px #bababa solid;
+}
+
+
+.textoEnCarrusel{
+    position: absolute;
+    z-index: 1;
+}
+
+@media(max-width: 639px){
+
+    .h1TextoImg1{
+        margin-top: 2%;
+        padding: 0 2%;
+        font-size: 1.23125rem;
+        max-width: 170px;
+    }
+    .pTextoImg1{
+        margin-top: 70px;
+        padding: 0 2%;
+        max-width: 150px;
+    }
+    .h1TextoImg2{
+        margin-top: 2%;
+        padding: 0 2%;
+        font-size: 1.23125rem;
+        max-width: 150px;
+    }
+    .pTextoImg2{
+        margin-top: 14%;
+        padding: 0 2%;
+    }
+    .h1TextoImg3{
+        margin-top: 2%;
+        color: #000000 !important;
+        width: 100%;
+        text-align: center;
+    }
+    .pTextoImg3{
+        margin-top: 12%;
+        color: #000000;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media(min-width: 639px) and (max-width: 780px){
+    .h1TextoImg1{
+        margin-top: 3%;
+        padding: 0 3%;
+        font-size: 1.7rem;
+        max-width: 220px;
+    }
+    .pTextoImg1{
+        margin-top: 90px;
+        padding: 0 3%;
+        max-width: 150px;
+    }
+    .h1TextoImg2{
+        margin-top: 3%;
+        padding: 0 3%;
+        font-size: 1.7rem;
+        max-width: 170px;
+    }
+    .pTextoImg2{
+        margin-top: 15%;
+        padding: 0 3%;
+    }
+    .h1TextoImg3{
+        margin-top: 3%;
+        color: #000000 !important;
+        width: 100%;
+        text-align: center;
+    }
+    .pTextoImg3{
+        margin-top: 12%;
+        color: #000000;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media(min-width: 780px) and (max-width: 960px){
+    .h1TextoImg1{
+        margin-top: 4%;
+        padding: 0 4%;
+        font-size: 1.9rem;
+        max-width: 250px;
+    }
+    .pTextoImg1{
+        margin-top: 110px;
+        padding: 0 4%;
+        max-width: 180px;
+    }
+    .h1TextoImg2{
+        margin-top: 4%;
+        padding: 0 4%;
+        font-size: 1.9rem;
+        max-width: 230px;
+    }
+    .pTextoImg2{
+        margin-top: 15%;
+        padding: 0 4%;
+    }
+    .h1TextoImg3{
+        margin-top: 4%;
+        color: #000000 !important;
+        width: 100%;
+        text-align: center;
+    }
+    .pTextoImg3{
+        margin-top: 12%;
+        color: #000000;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media(min-width: 960px){
+    .h1TextoImg1{
+        margin-top: 5%;
+        padding: 0 4%;
+        max-width: 250px;
+    }
+    .pTextoImg1{
+        margin-top: 18%;
+        padding: 0 6%;
+        max-width: 180px;
+    }
+    .h1TextoImg2{
+        margin-top: 5%;
+        padding: 0 5%;
+        max-width: 230px;
+    }
+    .pTextoImg2{
+        margin-top: 18%;
+        padding: 0 5%;
+    }
+    .h1TextoImg3{
+        margin-top: 5%;
+        color: #000000 !important;
+        width: 100%;
+        text-align: center;
+    }
+    .pTextoImg3{
+        margin-top: 12%;
+        color: #000000;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.uk-offcanvas{
+    z-index: 1003;
+}
