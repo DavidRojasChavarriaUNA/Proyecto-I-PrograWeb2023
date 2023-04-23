@@ -1,5 +1,5 @@
 body header, body footer, #menu-responsivo .uk-offcanvas-bar{
-    background-color: #000000 !important;
+    background-color: #212529 !important
 }
 
 #header{
@@ -28,13 +28,13 @@ main{
 }
 
 .text-menu{
-    color: #bababa !important;
+    color: #f8f9fa !important;
 }
-
+/*
 .uk-parent:hover>a {
     color: #ffffff !important;
     font-weight: bold;
-}
+}*/
 
 .texto-negro, .MarcarEnNegro:hover {
     color: #000000 !important;
@@ -77,7 +77,7 @@ main{
 }
 
 .logo{
-    max-width: 150px;
+    max-width: 120px;
 }
 
 .copy-right{
@@ -254,3 +254,7 @@ main{
 .uk-offcanvas{
     z-index: 1003;
 }
+
+.text-light {
+    color: #f8f9fa !important;
+  }
