@@ -18,17 +18,28 @@
                 class="uk-margin uk-width-large uk-margin-auto uk-card uk-card-default uk-card-body uk-box-shadow-large"
               >
                 <h3 class="uk-card-title uk-text-center">Bienvenido a bordo!</h3>
-                <form>
+                <form action="/seguridad/register" method="POST">
                   <div class="uk-margin">
                     <div class="uk-inline uk-width-1-1">
-                      <span class="uk-form-icon" uk-icon="icon: mail"></span>
-                      <input class="uk-input uk-form-large" type="text" />
+                      <input class="uk-input uk-form-large" type="text" name="name" placeholder="Nombre"/>
                     </div>
                   </div>
                   <div class="uk-margin">
                     <div class="uk-inline uk-width-1-1">
-                      <span class="uk-form-icon" uk-icon="icon: lock"></span>
-                      <input class="uk-input uk-form-large" type="password" />
+                      <span for="email" class="uk-form-icon" uk-icon="icon: mail"></span>
+                      <input class="uk-input uk-form-large" type="text" name="email" />
+                    </div>
+                  </div>
+                  <div class="uk-margin">
+                    <div class="uk-inline uk-width-1-1">
+                      <span for="user" class="uk-form-icon" uk-icon="icon: user"></span>
+                      <input class="uk-input uk-form-large" type="text" name="user" />
+                    </div>
+                  </div>
+                  <div class="uk-margin">
+                    <div class="uk-inline uk-width-1-1">
+                      <span for="password" class="uk-form-icon" uk-icon="icon: lock"></span>
+                      <input class="uk-input uk-form-large" type="password" name="password" />
                     </div>
                   </div>
                   <div class="uk-margin">
