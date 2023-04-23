@@ -1,0 +1,28 @@
+#logoMenu, #logoFooter {
+    max-width: 120px;
+}
+
+#principal{
+    min-height: 300px;
+    margin-top: 88px;
+}
+
+.accion:hover, .imgChooser:hover{
+    cursor: pointer;
+}
+
+.bi:hover{
+    font-size: 1.05rem;
+}
+
+.pt-88{
+    padding-top: 88px !important;
+}
+
+.width-100{
+    width: 100%;
+}
+
+.display-none{
+    display: none !important;
+}

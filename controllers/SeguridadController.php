@@ -5,16 +5,23 @@ include_once('./models/Codes.php');
 
 class  SeguridadController extends Controller{
     public function showLoginForm() {
+        $mensaje = $_GET['mensaje'];
+        $error = false;
+        if(!isset($mensaje)){
+            $mensaje = "";
+        }else{
+            $error = true;
+        }
         return view('seguridad/login', 
         ['title'=>'Mi voto app - Autenticarse',
-         'error'=>false,
-         'messaje'=>"",
+         'error'=>$error,
+         'messaje'=>$mensaje,
          'model' =>['email' => "",'password' => ""]]);
      }
 
      public function register() {
          return view('seguridad/register', 
-         ['title'=>'Mi voto app - Registrarse']);
+         ['title'=>'Mi voto - Registrarse']);
     }
     
     public function autenticate() {
@@ -33,15 +40,21 @@ class  SeguridadController extends Controller{
         $email = $_GET['email'];  
         $mensaje = $_GET['mensaje'];
         return view('seguridad/login',
-          ['title'=>'Mi voto app - Autenticarse', 
+          ['title'=>'Mi voto - Autenticarse', 
           'error'=>true,
           'messaje'=>$mensaje,
           'model' =>['email' => $email,'password' => ""]]);
     }
 
     public function logout() {
-        Auth::logout();
-        return redirect('/');
+        $respuesta = UserModel::logout();
+        if ($respuesta["Code"] == CodeSuccess) {
+            return redirect('/');
+        }
+        else{
+            $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
+            echo "<h1>{$mensaje}</h1>";
+        }
     }
 
 }
