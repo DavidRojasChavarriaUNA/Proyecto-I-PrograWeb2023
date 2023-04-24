@@ -1,0 +1,99 @@
+<h1 class="text-center">Crear votación</h1>
+<div class="row mb-3">
+    <div class="col-12">
+        <label class="form-label fs-3 mt-2">Titulo votación:</label>
+        <input type="text" class="form-control" value="" placeholder="Ingrese el titulo de la votación">
+    </div>
+</div>
+<h3 class="text-secondary mt-3 mb-3">Listado de opciones</h3>
+<div class="container">
+    <div class="row bg-white" id="ListaOpcionesAgregar">
+        <!-- Primera opcion de voto -->
+        <div class="col-md-3 border p-5 Opcion">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <label class="form-label text-primary  mt-2">Seleccionar imagen:</label>
+                    <img src="/imagenes/Seleccionar imagen.png"
+                        class="imgChooser img-polaroid profile-img img-thumbnail "
+                        onclick="SeleccionarArchivo('imgChooser4');" />
+                    <input class="form-control form-control-sm" type="file" accept="image/png, image/jpeg"
+                        style="display:none;" id="imgChooser4">
+                </div>
+
+                <div class="col-md-12  text-center">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <label class="form-label text-primary  mt-2">Nombre:</label>
+                            <input class="form-control" value="" placeholder="Ingrese el nombre" />
+                            <label class="form-label text-primary  mt-2">Descripción:</label>
+                            <textarea rows="10" class="form-control fw-light"
+                                placeholder="Ingrese la descripción"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12  text-center">
+                    <button type="button" class="btn btn-danger width-100" data-bs-toggle="modal"
+                        data-bs-target="#modalEliminar" onclick="EliminarOpcion(this);">Eliminar</button>
+                </div>
+            </div>
+        </div>
+        <!-- segunda opcion de voto -->
+        <div class="col-md-3 border p-5 Opcion">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <label class="form-label text-primary  mt-2">Seleccionar imagen:</label>
+                    <img src="/imagenes/Seleccionar imagen.png"
+                        class="imgChooser img-polaroid profile-img img-thumbnail "
+                        onclick="SeleccionarArchivo('imgChooser4');" />
+                    <input class="form-control form-control-sm" type="file" accept="image/png, image/jpeg"
+                        style="display:none;" id="imgChooser4">
+                </div>
+
+                <div class="col-md-12  text-center">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <label class="form-label text-primary  mt-2">Nombre:</label>
+                            <input class="form-control" value="" placeholder="Ingrese el nombre" />
+                            <label class="form-label text-primary  mt-2">Descripción:</label>
+                            <textarea rows="10" class="form-control fw-light"
+                                placeholder="Ingrese la descripción"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12  text-center">
+                    <button type="button" class="btn btn-danger width-100" data-bs-toggle="modal"
+                        data-bs-target="#modalEliminar" onclick="EliminarOpcion(this);">Eliminar</button>
+                </div>
+            </div>
+        </div>
+        <!-- Nueva opción -->
+        <div class="col-md-3 border p-5 NuevaOpcion">
+            <div class="row width-100">
+                <div class="col-md-12  text-center">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <i class="bi bi-plus-circle-fill text-success fs-1"></i>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <button type="button" class="btn btn-success width-100"
+                                onclick="NuevaOpcion('ListaOpcionesAgregar',this);">Nuevo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="d-grid gap-2 col-6 mx-auto mt-5">
+        <button type="button" class="btn btn-outline-success" id="GuardadoExitosoBtn"
+            onclick="MostrarGuardarExitoso();">
+            Guardar
+        </button>
+    </div>
+</div>
