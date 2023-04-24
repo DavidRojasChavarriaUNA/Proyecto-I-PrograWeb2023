@@ -20,20 +20,38 @@ class  SeguridadController extends Controller{
      }
 
      public function showRegistrationForm() {
-         return view('seguridad/register', 
-         ['title'=>'Mi voto - Registrarse']);
+        return view('seguridad/register', 
+                 ['title'=>'Mi voto app - Registrarse',
+                 'login'=>Auth::check()]);
     }
     public function register() {
         $name = Input::get('name');  
         $email = Input::get('email');  
         $user = Input::get('user');  
         $password = Input::get('password');
-        $userCreate = [
+        $item = [
           'name'=>$name,'email'=>$email,  
           'user'=>$user,'password'=>$password];
-        UserModel::create($userCreate);
-        return redirect('/');
+        
+        $respuesta = UserModel::CreateUser($item);
+        if ($respuesta["Code"] == CodeSuccess) {
+          return redirect("/seguridad/showLoginForm");
+        }
+        $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
+        return redirect("/seguridad/registrationError?email={$email}&mensaje={$mensaje}");
       }
+
+      public function registrationError() {
+        $name = $_GET['name']; 
+        $email = $_GET['email'];
+        $user = $_GET['user'];   
+        $mensaje = $_GET['mensaje'];
+        return view('seguridad/register',
+          ['title'=>'Mi voto app - Registrarse', 
+          'error'=>true,
+          'messaje'=>$mensaje,
+          'model' =>['email' => $email,'password' => ""]]);
+    }
     
     public function autenticate() {
         $email = Input::get('email');   

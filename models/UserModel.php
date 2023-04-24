@@ -36,6 +36,15 @@
           return ["Code" => CodeError, "message" => "Ocurrió un error al validar si el usuario está autenticado, {$e->getMessage()}."];
       }
     }
+    public static function CreateUser($item)
+  {
+    try {
+      self::create($item);
+      return ["Code" => 0, "message" => "Usuario creado con éxito."];
+    } catch (Exception $e) {
+      return ["Code" => 99, "message" => "No se pudo crear el usuario, {$e->getMessage()}."];
+    }
+  }
 
     public static function logout() {
       try {
