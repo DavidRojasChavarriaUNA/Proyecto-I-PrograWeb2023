@@ -13,4 +13,5 @@
     const RutaImagenDefault = "/imagenes/Seleccionar imagen.png";
     const votacion = "votacion";
     const votacionCreate = "/votacion/create";
+    const votacionEdit = "/votacion/%d/edit";
 ?>

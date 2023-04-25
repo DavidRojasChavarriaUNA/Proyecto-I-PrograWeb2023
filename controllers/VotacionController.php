@@ -56,10 +56,8 @@
 
         $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
         if ($respuesta["Code"] == CodeSuccess) {
-          //TODO: redireccionar a edit con el id y quitar de sesión 
-          Session::put(votacion,$votacion);
-          //Session::forget(votacion);
-          return redirect(votacionCreate."?GetFromSession=1&id={$respuesta['id']}");
+          Session::forget(votacion);
+          return redirect(sprintf(votacionEdit, $respuesta['id']));
         }
         else{
           Session::put(votacion,$votacion);
