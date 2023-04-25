@@ -9,6 +9,7 @@ class  SitioInternoController extends InternalController{
         if(!$this->IsAutenticated()) return $this->RedirectToLogin();
         return view('sitioInterno/index', 
         ['title'=>'Mi voto - Principal',
+         'isMain' => true,
          'isVote' => false,
          'isCreateVote' => false,
          'showVotesManteinment' => false,

@@ -23,6 +23,7 @@
         
         return view('sitioInterno/index', 
         ['title'=>'Mi voto - crear nueva votación',
+         'isMain' => false,
          'isVote' => false,
          'isCreateVote' => true,
          'showVotesManteinment' => false,
@@ -64,6 +65,21 @@
           return redirect(votacionCreate."?GetFromSession=1");
         }
       }
+
+      public function edit($id) {
+        $votacion = null;
+        $opciones = null;
+        return view('sitioInterno/index', 
+        ['title'=>'Mi voto - modificar votación',
+         'isMain' => false,
+         'isVote' => false,
+         'isCreateVote' => false,
+         'showVotesManteinment' => false,
+         'isEditVote' => true,
+         'votacion' => $votacion,
+         'opciones' =>  $opciones,
+         'user'=> $this->User]);
+      }  
 
   }
 ?>

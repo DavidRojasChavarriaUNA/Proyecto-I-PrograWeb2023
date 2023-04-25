@@ -5,7 +5,13 @@
   {{> headSitioInterno}}
 </head>
 
+
+{{#isMain}}
+<body class="d-flex flex-column min-vh-100">
+{{/isMain}}
+{{^isMain}}
 <body>
+{{~isMain}}
    {{> headerSitioInterno}}
   <main id="principal" class="container">
 
