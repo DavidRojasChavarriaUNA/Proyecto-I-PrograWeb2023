@@ -16,7 +16,7 @@
         echo "file not uploaded {$name}";
         return;
       }
-      $uploaddir = '/imagenes/uploads/';
+      $uploaddir = './imagenes/uploads/';
       $uploadfile = $uploaddir . basename($_FILES[$name]['name']);
       if (move_uploaded_file($_FILES[$name]['tmp_name'], $uploadfile)) {
           echo "File is valid, and was successfully uploaded.\n";

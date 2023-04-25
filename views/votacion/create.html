@@ -1,6 +1,7 @@
 <section id="NuevoVotacion" class="m-5 pt-88">
     <article>
         <section>
+            <!-- <form action="/votacion" method="post" enctype="multipart/form-data"> -->
             <form action="/votacion" method="post">
                 {{#votacion}}
                 <h1 class="text-center">Crear votación</h1>
@@ -8,6 +9,7 @@
                 <input type="hidden" value="{{idEstado}}" name="idEstado" required>
                 <input type="hidden" value="{{idEstado}}" name="idEstado" required>
                 <input type="hidden" value="{{totalOpciones}}" name="totalOpciones" required>
+                <!-- <input type="file" name="my_file"> -->
                 <div class="row mb-3">
                     <div class="col-12">
                         <label class="form-label fs-3 mt-2">Titulo votación:</label>
