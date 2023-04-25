@@ -65,5 +65,19 @@
         }
       }
 
+      public function edit($id) {
+        $votacion = null;
+        $opciones = null;
+        return view('sitioInterno/index', 
+        ['title'=>'Mi voto - modificar votación',
+         'isVote' => false,
+         'isCreateVote' => false,
+         'showVotesManteinment' => false,
+         'isEditVote' => true,
+         'votacion' => $votacion,
+         'opciones' =>  $opciones,
+         'user'=> $this->User]);
+      }  
+
   }
 ?>
