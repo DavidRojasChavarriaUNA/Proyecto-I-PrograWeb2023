@@ -86,11 +86,29 @@
               throw new Exception($mensaje);
             }
           }
-          return ["Code" => CodeSuccess, "message" => "Votación creado con éxito.", "id" => $identity];
+          return ["Code" => CodeSuccess, "message" => "Votación creada con éxito.", "id" => $identity];
       }
       catch (Exception $e) {
           return ["Code" => CodeError, "message" => "No se pudo crear la votación, {$e->getMessage()}."];
       }
+    }
+
+    public static function RemoveOpcionById($votacion, $idOpcion){
+      $Opciones = $votacion['opciones'];
+      $OpcionesRestantes = [];
+      for($i=0; $i<count($Opciones); $i++){
+        $Opcion = $Opciones[$i];
+        if($idOpcion != $Opcion['id']){
+          array_push($OpcionesRestantes, $Opcion);
+        }
+      }
+      for($x=0; $x<count($OpcionesRestantes); $x++){
+        $OpcionesRestantes[$x]['posicion'] = $x;
+      }
+      unset($Opciones);
+      $votacion['totalOpciones'] = count($OpcionesRestantes);
+      $votacion['opciones'] = $OpcionesRestantes;
+      return $votacion;
     }
 
   }

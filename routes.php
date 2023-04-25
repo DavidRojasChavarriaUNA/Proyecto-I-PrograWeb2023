@@ -12,5 +12,7 @@
     
     Route::resource('/votacion', 'VotacionController');
     Route::post('/votacion/newOption', 'VotacionController@newOption');
+    Route::post('/votacion/removeOption','VotacionController@removeOption');
+
     Route::dispatch();
 ?>
