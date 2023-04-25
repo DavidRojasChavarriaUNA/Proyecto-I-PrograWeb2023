@@ -86,7 +86,7 @@
               throw new Exception($mensaje);
             }
           }
-          return ["Code" => CodeSuccess, "message" => "Votación creado con éxito.", "id" => $identity];
+          return ["Code" => CodeSuccess, "message" => "Votación creada con éxito.", "id" => $identity];
       }
       catch (Exception $e) {
           return ["Code" => CodeError, "message" => "No se pudo crear la votación, {$e->getMessage()}."];
