@@ -4,9 +4,7 @@
   include_once('./models/Codes.php');
   include_once('InternalController.php');
 
-  class VotacionController extends InternalController {  
-
-      
+  class VotacionController extends InternalController {
 
       public function create() {
         if(!$this->IsAutenticated()) return $this->RedirectToLogin();
@@ -29,7 +27,7 @@
          'showVotesManteinment' => false,
          'isEditVote' => false,
          'votacion' => $votacion,
-         'opciones' =>  $opciones,
+         'opciones' => count($opciones)>0 ? $opciones : false,
          'user'=> $this->User]);
       }
 
@@ -44,6 +42,18 @@
         //echo json_encode($votacion);
         $votacion = VotacionModel::AddNewDefaultOption($votacion);
         Session::put(votacion,$votacion);
+        $destiny = $_GET['destiny']; 
+        if($destiny == "create")
+          return redirect(votacionCreate."?GetFromSession=1");
+      }
+
+      public function removeOption() {
+        if(!$this->IsAutenticated()) return $this->RedirectToLogin();
+        $idOpcion = $_GET['idOpcion']; 
+        $votacion = VotacionModel::ReadModelFromPost();
+        $votacion = VotacionModel::RemoveOpcionById($votacion, $idOpcion);
+        Session::put(votacion,$votacion);
+
         $destiny = $_GET['destiny']; 
         if($destiny == "create")
           return redirect(votacionCreate."?GetFromSession=1");
@@ -77,7 +87,7 @@
          'showVotesManteinment' => false,
          'isEditVote' => true,
          'votacion' => $votacion,
-         'opciones' =>  $opciones,
+         'opciones' => count($opciones)>0 ? $opciones : false,
          'user'=> $this->User]);
       }  
 

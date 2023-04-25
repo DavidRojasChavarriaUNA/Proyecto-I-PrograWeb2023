@@ -93,6 +93,24 @@
       }
     }
 
+    public static function RemoveOpcionById($votacion, $idOpcion){
+      $Opciones = $votacion['opciones'];
+      $OpcionesRestantes = [];
+      for($i=0; $i<count($Opciones); $i++){
+        $Opcion = $Opciones[$i];
+        if($idOpcion != $Opcion['id']){
+          array_push($OpcionesRestantes, $Opcion);
+        }
+      }
+      for($x=0; $x<count($OpcionesRestantes); $x++){
+        $OpcionesRestantes[$x]['posicion'] = $x;
+      }
+      unset($Opciones);
+      $votacion['totalOpciones'] = count($OpcionesRestantes);
+      $votacion['opciones'] = $OpcionesRestantes;
+      return $votacion;
+    }
+
   }
 
 ?>

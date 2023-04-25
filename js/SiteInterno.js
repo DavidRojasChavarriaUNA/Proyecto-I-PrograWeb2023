@@ -3,19 +3,7 @@ SeleccionarArchivo = function(idElemento){
     elemento.click();
 }
 
-MostrarGuardarExitoso = function() {
-    var myAlert =document.getElementById('GuardadoExitoso');
-    var bsAlert = new bootstrap.Toast(myAlert);
-    bsAlert.show();
-}
-
 var elementoEliminar = null;
-
-EliminarOpcion = function(boton){
-    elementoEliminar = boton.closest(".Opcion");
-    var AccionEliminar = document.getElementById("AccionEliminar");
-    AccionEliminar.onclick = EjecutarAccionEliminar;
-}
 
 EliminarVotacion = function(boton){
     elementoEliminar = boton.closest(".filaVotacion");
