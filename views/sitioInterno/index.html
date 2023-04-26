@@ -7,87 +7,49 @@
 
 
 {{#isMain}}
+
 <body class="d-flex flex-column min-vh-100">
-{{/isMain}}
-{{^isMain}}
-<body>
-{{~isMain}}
-   {{> headerSitioInterno}}
-  <main id="principal" class="container">
+  {{/isMain}}
+  {{^isMain}}
 
-    {{#isVote}}
-    {{> /votacion/votar}}
-    {{/isVote}}
+  <body>
+    {{~isMain}}
+    {{> headerSitioInterno}}
+    <main id="principal" class="container">
 
-    {{#isCreateVote}}
-    {{> /votacion/create}}
-    {{/isCreateVote}}
-    
-    {{#showVotesManteinment}}
-    <section id="SeleccionarVotacion" class="border bg-light mt-5 p-5">
-      <article>
-        <section>
-          {{> /votacion/index}}
-        </section>
-      </article>
-    </section>
-    {{/showVotesManteinment}}
-    {{#isEditVote}}
-    <section id="ModificarVotacion" class="m-3">
-      <article>
-        <section>
-          {{> /votacion/edit}}
-        </section>
-      </article>
-    </section>
-    {{/isEditVote}}
-    
-    <section id="modales">
-      <!-- Modal Deactivar-->
-      <div class="modal fade" id="modalDesactivar" tabindex="-1" aria-labelledby="labelDesactivar" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="labelDesactivar">Desactivar</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              ¿Desea desactivar el elemento seleccionado?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button id="AccionDesactivar" type="button" class="btn btn-danger"
-                data-bs-dismiss="modal" >Desactivar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Modal Activar-->
-      <div class="modal fade" id="modalActivar" tabindex="-1" aria-labelledby="labelDesactivar" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="labelDesactivar">Desactivar</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
-            </div>
-            <div class="modal-body">
-              ¿Desea activar el elemento seleccionado?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button id="AccionActivar" type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="location.href='/votacion/estado/{{id}}'">Activar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="toastMensajes">
-      {{#MostrarMensaje}}
-      {{> /toadsAlerts/ToastAlert}}
-      {{/MostrarMensaje}}
-    </section>
-  </main>
-  {{> footerSitioInterno}}
-</body>
+      {{#isVote}}
+      {{> /votacion/votar}}
+      {{/isVote}}
+
+      {{#isCreateVote}}
+      {{> /votacion/create}}
+      {{/isCreateVote}}
+
+      {{#showVotesManteinment}}
+      <section id="SeleccionarVotacion" class="border bg-light mt-5 p-5">
+        <article>
+          <section>
+            {{> /votacion/index}}
+          </section>
+        </article>
+      </section>
+      {{/showVotesManteinment}}
+      {{#isEditVote}}
+      <section id="ModificarVotacion" class="m-3">
+        <article>
+          <section>
+            {{> /votacion/edit}}
+          </section>
+        </article>
+      </section>
+      {{/isEditVote}}
+      <section id="toastMensajes">
+        {{#MostrarMensaje}}
+        {{> /toadsAlerts/ToastAlert}}
+        {{/MostrarMensaje}}
+      </section>
+    </main>
+    {{> footerSitioInterno}}
+  </body>
 
 </html>

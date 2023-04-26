@@ -134,17 +134,11 @@
          'user'=> $this->User]);
       }  
 
-      public function cambiarEstado($id) {
+      public function cambiarEstado($id,$idEstado) {
         if(!$this->IsAutenticated()) return $this->RedirectToLogin();
-        $respuesta = VotacionModel::GetVotacionById($id);//extraer datos de la votacion
-        if ($respuesta["Code"] == CodeSuccess) { //verificar resultado
-          $votacion = $respuesta["votacion"]; //asignar valores
-          if(($votacion['idEstado']) == 2){
-              $idEstado = 3;
-          }
-          if(($votacion['idEstado']) == 3){
-            $idEstado = 2;
-          }
+        $respuesta = VotacionModel::GetVotacionById($id);
+        if ($respuesta["Code"] == CodeSuccess) { 
+          $votacion = $respuesta["votacion"];
           $descripcion = $votacion['descripcion'];
           $fechaHoraInicio = $votacion['fechaHoraInicio'];
           $fechaHoraFin = $votacion['fechaHoraFin'];
@@ -159,7 +153,5 @@
         }
         return redirect(votacionIndex."?mensaje={$mensaje}");
       }
-
-
   }
 ?>
