@@ -1,8 +1,7 @@
-<h1 class="text-center">Modificar votación</h1>
-<h3 class="text-secondary mt-3 mb-3">Listado de votaciones</h3>
+<h2 class="text-center">Listado de votaciones</h2>
 <div class="row">
     <div class="col-12 text-end">
-        <a href="#NuevoVotacion" class="btn btn-primary"><i class="bi bi-plus"></i> Nuevo</a>
+        <a href="/" class="btn btn-primary"><i class="bi bi-plus"></i>Nuevo</a>
     </div>
 </div>
 <div class="table-responsive">
@@ -10,17 +9,22 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Votación</th>
+                <th>Descripción</th>
                 <th>Estado</th>
+                <th>Apertura</th>
+                <th>Cierre</th>
                 <th>Acción</th>
             </tr>
         </thead>
         <tbody>
-            <tr class="filaVotacion">
-                <td>1</td>
-                <td>Selección de presidencia</td>
-                <td id="estado1">Activo</td>
-                <td>
+            {{#votacion}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{descripcion}}</td>
+                <td>{{idEstado}}</td>
+                <td>{{fechaHoraInicio}}</td>
+                <td>{{fechaHoraFin}}</td>
+                <td> 
                     <a href="#Resultados" class="text-success accion" title="Ver resultados"><i
                             class="bi bi-eye-fill"></i></a>
                     <a class="text-danger accion" title="Eliminar" data-bs-toggle="modal"
@@ -34,40 +38,10 @@
                         data-bs-target="#modalActivar"
                         onclick="ActivarVotacion('estado1','btnDesactivar1', 'btnActivar1');"><i
                             class="bi bi-check-lg"></i></a>
+                    <a href="/votacion/edit/{{id}}" class="text-primary accion" title="Modificar"><i class="bi bi-pencil"></i></a>
                 </td>
             </tr>
-            <tr class="filaVotacion">
-                <td>2</td>
-                <td>Trabajador del año</td>
-                <td id="estado2">En proceso</td>
-                <td>
-                    <a href="#ModificarVotacion" class="text-primary accion" title="Modificar"><i
-                            class="bi bi-pencil"></i></a>
-                    <a class="text-danger accion" title="Eliminar" data-bs-toggle="modal"
-                        data-bs-target="#modalEliminar" onclick="EliminarVotacion(this);"><i
-                            class="bi bi-trash"></i></a>
-                </td>
-            </tr>
-            <tr class="filaVotacion">
-                <td>3</td>
-                <td>Mejor equipo</td>
-                <td id="estado3">Inactivo</td>
-                <td>
-                    <a href="#Resultados" class="text-success accion" title="Ver resultados"><i
-                            class="bi bi-eye-fill"></i></a>
-                    <a class="text-danger accion" title="Eliminar" data-bs-toggle="modal"
-                        data-bs-target="#modalEliminar" onclick="EliminarVotacion(this);"><i
-                            class="bi bi-trash"></i></a>
-                    <a id="btnDesactivar3" class="text-danger accion display-none" title="Desactivar"
-                        data-bs-toggle="modal" data-bs-target="#modalDesactivar"
-                        onclick="DesactivarVotacion('estado3','btnActivar3', 'btnDesactivar3');"><i
-                            class="bi bi-x-lg"></i></a>
-                    <a id="btnActivar3" class="text-success accion" title="Activar" data-bs-toggle="modal"
-                        data-bs-target="#modalActivar"
-                        onclick="ActivarVotacion('estado3','btnDesactivar3', 'btnActivar3');"><i
-                            class="bi bi-check-lg"></i></a>
-                </td>
-            </tr>
+            {{/votacion}}
         </tbody>
     </table>
 </div>

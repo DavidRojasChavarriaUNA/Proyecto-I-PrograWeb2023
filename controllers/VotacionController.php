@@ -80,6 +80,24 @@
         }
       }
 
+      public function index() {
+        if(!$this->IsAutenticated()) return $this->RedirectToLogin();
+        $opciones = 0;
+        $mensaje = $_GET['mensaje'];
+        $votacion = VotacionModel::GetAllVotaciones();
+        return view('sitioInterno/index', 
+            ['title' => 'Mi voto - listado de votaciones',
+            'isMain' => false,
+            'isVote' => false,
+            'isCreateVote' => false,
+            'showVotesManteinment' => true,
+            'isEditVote' => false,
+            'votacion' => $votacion,
+            'opciones' => count($opciones)>0 ? $opciones : false,
+            'MostrarMensaje' => (isset($mensaje)? ["message" => $mensaje] : false),
+            'user'=> $this->User]);
+      }
+
       public function edit($id) {
         $respuesta = VotacionModel::GetVotacionById($id);
         if ($respuesta["Code"] == CodeSuccess) {
