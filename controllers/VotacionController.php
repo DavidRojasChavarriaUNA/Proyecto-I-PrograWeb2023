@@ -31,6 +31,7 @@
          'votacion' => $votacion,
          'opciones' => count($opciones)>0 ? $opciones : false,
          'MostrarMensaje' => (isset($mensaje)? ["message" => $mensaje] : false),
+         'destiny' => destiny."=".destinyCreate,
          'user'=> $this->User]);
       }
 
@@ -45,8 +46,8 @@
         //echo json_encode($votacion);
         $votacion = VotacionModel::AddNewDefaultOption($votacion);
         Session::put(votacion,$votacion);
-        $destiny = $_GET['destiny']; 
-        if($destiny == "create")
+        $destiny = $_GET[destiny]; 
+        if($destiny == destinyCreate)
           return redirect(votacionCreate."?GetFromSession=1&mensaje=0 - Opción agregada");
       }
 
@@ -57,8 +58,8 @@
         $votacion = VotacionModel::RemoveOpcionById($votacion, $idOpcion);
         Session::put(votacion,$votacion);
 
-        $destiny = $_GET['destiny']; 
-        if($destiny == "create")
+        $destiny = $_GET[destiny]; 
+        if($destiny == destinyCreate)
           return redirect(votacionCreate."?GetFromSession=1&mensaje=0 - Opción eliminada");
       }
 
@@ -95,6 +96,7 @@
          'votacion' => $votacion,
          'opciones' => count($opciones)>0 ? $opciones : false,
          'MostrarMensaje' => (isset($mensaje)? ["message" => $mensaje] : false),
+         'destiny' => destiny."=".destinyEdit,
          'user'=> $this->User]);
       }  
 
