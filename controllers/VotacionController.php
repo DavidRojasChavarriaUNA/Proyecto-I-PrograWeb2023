@@ -134,5 +134,24 @@
          'user'=> $this->User]);
       }  
 
+      public function cambiarEstado($id,$idEstado) {
+        if(!$this->IsAutenticated()) return $this->RedirectToLogin();
+        $respuesta = VotacionModel::GetVotacionById($id);
+        if ($respuesta["Code"] == CodeSuccess) { 
+          $votacion = $respuesta["votacion"];
+          $descripcion = $votacion['descripcion'];
+          $fechaHoraInicio = $votacion['fechaHoraInicio'];
+          $fechaHoraFin = $votacion['fechaHoraFin'];
+          $item = ['id'=>$id,
+                   'descripcion'=>$descripcion,'idEstado'=>$idEstado,
+                   'fechaHoraInicio'=>$fechaHoraInicio,'fechaHoraFin'=>$fechaHoraFin];
+          $respuesta = VotacionModel::ChangeState($item);
+          $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
+        }
+        else{
+          $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
+        }
+        return redirect(votacionIndex."?mensaje={$mensaje}");
+      }
   }
 ?>

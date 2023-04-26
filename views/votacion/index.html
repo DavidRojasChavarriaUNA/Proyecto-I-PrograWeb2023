@@ -22,25 +22,71 @@
                 <td>{{idEstado}}</td>
                 <td>{{fechaHoraInicio}}</td>
                 <td>{{fechaHoraFin}}</td>
-                <td> 
-                    <a href="#Resultados" class="text-success accion" title="Ver resultados"><i
-                            class="bi bi-eye-fill"></i></a>
+                <td>
+                    <a id="desactivar{{idEstado}}" class="text-danger accion" title="Desactivar" data-bs-toggle="modal"
+                        data-bs-target="#modalDesactivar"><i class="bi bi-x-lg"></i></a>
+                    <a id="activar{{idEstado}}" class="text-success accion" title="Activar" data-bs-toggle="modal"
+                        data-bs-target="#modalActivar"><i class="bi bi-check-lg"></i></a>
+
                     <a class="text-danger accion" title="Eliminar" data-bs-toggle="modal"
                         data-bs-target="#modalEliminar" onclick="EliminarVotacion(this);"><i
                             class="bi bi-trash"></i></a>
-                    <a id="btnDesactivar1" class="text-danger accion" title="Desactivar" data-bs-toggle="modal"
-                        data-bs-target="#modalDesactivar"
-                        onclick="DesactivarVotacion('estado1','btnActivar1', 'btnDesactivar1');"><i
-                            class="bi bi-x-lg"></i></a>
-                    <a id="btnActivar1" class="text-success accion display-none" title="Activar" data-bs-toggle="modal"
-                        data-bs-target="#modalActivar"
-                        onclick="ActivarVotacion('estado1','btnDesactivar1', 'btnActivar1');"><i
-                            class="bi bi-check-lg"></i></a>
-                    <a href="/votacion/edit/{{id}}" class="text-primary accion" title="Modificar"><i class="bi bi-pencil"></i></a>
+                    <a href="/votacion/edit/{{id}}" class="text-primary accion" title="Modificar"><i
+                            class="bi bi-pencil"></i></a>
+                    <a id="btnResultados{{id}}" href="/votaciones/resultados/{{id}}" class="text-success accion"
+                        title="Ver resultados"><i class="bi bi-eye-fill"></i></a>
+
+                    <section id="modales">
+                        <!-- Modal Deactivar-->
+                        <div class="modal fade" id="modalDesactivar" tabindex="-1" aria-labelledby="labelDesactivar"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="labelDesactivar">Desactivar</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Desea desactivar el elemento seleccionado?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button id="AccionDesactivar" type="button" class="btn btn-danger"
+                                            data-bs-dismiss="modal"
+                                            onclick="location.href='/votacion/estado/{{id}}/3'">Desactivar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal Activar-->
+                        <div class="modal fade" id="modalActivar" tabindex="-1" aria-labelledby="labelDesactivar"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="labelDesactivar">Desactivar</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Desea activar el elemento seleccionado?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button id="AccionActivar" type="button" class="btn btn-success"
+                                            data-bs-dismiss="modal"
+                                            onclick="location.href='/votacion/estado/{{id}}/2'">Activar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </td>
             </tr>
             {{/votacion}}
         </tbody>
     </table>
 </div>
-
