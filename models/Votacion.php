@@ -135,7 +135,11 @@
           return ["Code" => CodeError, "message" => "No se pudo obtener la votación, {$e->getMessage()}."];
       }
     }
-
+    
+    public static function GetAllVotaciones()
+    {
+      return self::all();
+    }
   }
 
 ?>
