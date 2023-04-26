@@ -5,11 +5,11 @@
         <div class="col-md-12 text-center">
             <label class="form-label text-primary  mt-2">Seleccionar imagen:</label>
             <img src="{{rutaImagen}}" id="img{{posicion}}"
-                class="imgChooser img-polaroid profile-img img-thumbnail" 
-                onclick="SeleccionarArchivo('imgChooser{{posicion}}'); "/>
+                class="imgChooser img-polaroid profile-img img-thumbnail"/>
             <input type="hidden" value="{{rutaImagen}}" id="rutaImagen{{posicion}}" name="rutaImagen{{posicion}}" />
             <input class="form-control form-control-sm" type="file" accept="image/png, image/jpeg" 
-                style="display:none;" id="imgChooser{{posicion}}" onchange="CargarImagen(this,'img{{posicion}}','rutaImagen{{posicion}}');">
+                AutofileChooser ImgTagIdToDisplay="img{{posicion}}" InputTagIdToStoreBase64Img="rutaImagen{{posicion}}"
+                style="display:none;" id="imgChooser{{posicion}}">
         </div>
 
         <div class="col-md-12  text-center">
