@@ -138,7 +138,11 @@
     
     public static function GetAllVotaciones()
     {
-      return self::all();
+      $votaciones = self::all();
+      if(!empty($votaciones)){
+        return ["Code" => CodeSuccess, "message" => "Votaciones encontradas", "votacion" => $votaciones];
+      }
+      return ["Code" => CodeError, "message" => "No cuenta con votaciones registradas"];
     }
   }
 

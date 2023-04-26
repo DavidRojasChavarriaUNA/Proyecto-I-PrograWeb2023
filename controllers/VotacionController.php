@@ -84,7 +84,15 @@
         if(!$this->IsAutenticated()) return $this->RedirectToLogin();
         $opciones = 0;
         $mensaje = $_GET['mensaje'];
-        $votacion = VotacionModel::GetAllVotaciones();
+        $respuesta = VotacionModel::GetAllVotaciones();
+        if ($respuesta["Code"] == CodeSuccess) {
+          $votacion = $respuesta["votacion"];
+        }
+        else{
+          $votacion=false;
+          $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
+        }
+
         return view('sitioInterno/index', 
             ['title' => 'Mi voto - listado de votaciones',
             'isMain' => false,

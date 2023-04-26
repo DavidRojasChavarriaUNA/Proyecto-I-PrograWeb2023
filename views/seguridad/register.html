@@ -21,23 +21,28 @@ REGISTER
                 <h3 class="uk-card-title uk-text-center">Bienvenido a bordo!</h3>
                 <form action="/seguridad/register" method="POST">
                   <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">Nombre</label>
                     <div class="uk-inline uk-width-1-1">
-                      <input class="uk-input uk-form-large" type="text" name="name" placeholder="Nombre" maxlength=30 required/>
+                      <span for="email" class="uk-form-icon" uk-icon="icon: info"></span>
+                      <input class="uk-input uk-form-large" type="text" name="name" maxlength=30 required/>
                     </div>
                   </div>
                   <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">Correo Electrónico</label>
                     <div class="uk-inline uk-width-1-1">
                       <span for="email" class="uk-form-icon" uk-icon="icon: mail"></span>
                       <input class="uk-input uk-form-large" type="email" name="email" maxlength=100 required/>
                     </div>
                   </div>
                   <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">Usuario</label>
                     <div class="uk-inline uk-width-1-1">
                       <span for="user" class="uk-form-icon" uk-icon="icon: user"></span>
                       <input class="uk-input uk-form-large" type="text" name="user" maxlength=20 required/>
                     </div>
                   </div>
                   <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">Contraseña</label>
                     <div class="uk-inline uk-width-1-1">
                       <span for="password" class="uk-form-icon" uk-icon="icon: lock"></span>
                       <input class="uk-input uk-form-large" type="password" name="password" maxlength=20 required/>
