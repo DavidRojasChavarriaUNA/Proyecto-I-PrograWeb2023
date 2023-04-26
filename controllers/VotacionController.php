@@ -81,8 +81,16 @@
       }
 
       public function edit($id) {
-        $votacion = null;
-        $opciones = null;
+        $respuesta = VotacionModel::GetVotacionById($id);
+        if ($respuesta["Code"] == CodeSuccess) {
+          $votacion = $respuesta["votacion"];
+          $opciones = $votacion['opciones'];
+        }
+        else{
+          $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
+          //rediereccionar al index y mostrar error
+          return redirect(votacionIndex."?mensaje={$mensaje}");
+        }
 
         $mensaje = $_GET['mensaje'];
 

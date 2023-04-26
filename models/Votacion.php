@@ -111,6 +111,31 @@
       return $votacion;
     }
 
+    public static function GetVotacionById($id){
+      try{
+        $votaciones = self::find($id);
+        $votacion = null;
+        if(!empty($votaciones)){
+          $votacion = $votaciones[0];
+          $Opciones = OpcionModel::GetOpcionesByIdVotacion($id);
+          $votacion['opciones'] = [];
+          if(!empty($Opciones)){
+            for($i = 0; $i<count($Opciones); $i++){
+              $opcion = $Opciones[$i];
+              $opcion['posicion'] = $i;
+              array_push($votacion['opciones'], $opcion);
+            }
+          }
+          $votacion['totalOpciones'] = count($votacion['opciones']);
+          return ["Code" => CodeSuccess, "message" => "Votación obtenida con éxito.", "votacion" => $votacion];
+        }
+        return ["Code" => CodeNotFound, "message" => "No se encontró una votación con el id: {$id}"];
+      }
+      catch (Exception $e) {
+          return ["Code" => CodeError, "message" => "No se pudo obtener la votación, {$e->getMessage()}."];
+      }
+    }
+
   }
 
 ?>
