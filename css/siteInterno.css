@@ -22,3 +22,12 @@
 .display-none{
     display: none !important;
 }
+
+
+#desactivar3{
+    display: none;
+}
+
+#activar2{
+    display: none;
+}

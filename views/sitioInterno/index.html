@@ -57,7 +57,7 @@
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button id="AccionDesactivar" type="button" class="btn btn-danger"
-                data-bs-dismiss="modal">Desactivar</button>
+                data-bs-dismiss="modal" >Desactivar</button>
             </div>
           </div>
         </div>
@@ -68,14 +68,14 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="labelDesactivar">Desactivar</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
             </div>
             <div class="modal-body">
               ¿Desea activar el elemento seleccionado?
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button id="AccionActivar" type="button" class="btn btn-success" data-bs-dismiss="modal">Activar</button>
+              <button id="AccionActivar" type="button" class="btn btn-success" data-bs-dismiss="modal" onclick="location.href='/votacion/estado/{{id}}'">Activar</button>
             </div>
           </div>
         </div>
