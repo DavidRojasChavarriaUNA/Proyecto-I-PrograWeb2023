@@ -54,6 +54,12 @@
       }
     }
 
+    public static function GetOpcionesByIdVotacion($idVotacion){
+      $opciones = self::where('idVotacion',$idVotacion);
+      //$opciones = DB::table(self::$table)->where('idVotacion',$idVotacion)->orderBy('id', 'ASC')->get();
+      return $opciones;
+    }
+
   }
   
 ?>
