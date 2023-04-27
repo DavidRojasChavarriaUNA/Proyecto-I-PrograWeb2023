@@ -175,6 +175,26 @@
           return ["Code" => CodeError, "message" => "No se pudo eliminar la votación, {$e->getMessage()}."];
       }
     }
+    
+    public static function UpdateVotacion($item){
+      try {
+          self::update($item["id"], $item);
+          return ["Code" => CodeSuccess, "message" => "Votación modificado con éxito."];
+      }
+      catch (Exception $e) {
+          return ["Code" => CodeError, "message" => "No se pudo modificar la votación, {$e->getMessage()}."];
+      }
+  }
+
+  public static function ChangeState($item){
+    try {
+        self::update($item["id"], $item);
+        return ["Code" => CodeSuccess, "message" => "Estado modificado con éxito."];
+    }
+    catch (Exception $e) {
+        return ["Code" => CodeError, "message" => "No se pudo modificar el estado, {$e->getMessage()}."];
+    }
+}
 
   }
 
