@@ -138,6 +138,12 @@
     
     public static function GetAllVotaciones()
     {
+      //se actualiza el estado de las votaciones
+      $respuesta = self::AutomaticUpdateStatesVotaciones();
+      //si falló se debe mostrar la respuesta
+      if ($respuesta["Code"] != CodeSuccess){
+        return $respuesta;
+      }
       $votaciones = self::all();
       if(!empty($votaciones)){
         return ["Code" => CodeSuccess, "message" => "Votaciones encontradas", "votacion" => $votaciones];
@@ -184,17 +190,75 @@
       catch (Exception $e) {
           return ["Code" => CodeError, "message" => "No se pudo modificar la votación, {$e->getMessage()}."];
       }
-  }
+    }
 
-  public static function ChangeState($item){
-    try {
-        self::update($item["id"], $item);
-        return ["Code" => CodeSuccess, "message" => "Estado modificado con éxito."];
+    public static function ChangeState($item){
+      try {
+          self::update($item["id"], $item);
+          return ["Code" => CodeSuccess, "message" => "Estado modificado con éxito."];
+      }
+      catch (Exception $e) {
+          return ["Code" => CodeError, "message" => "No se pudo modificar el estado, {$e->getMessage()}."];
+      }
     }
-    catch (Exception $e) {
-        return ["Code" => CodeError, "message" => "No se pudo modificar el estado, {$e->getMessage()}."];
+
+    public static function UpdateStatusVotacionEnProcesoIfIsRequerid(&$votacion){
+      if($votacion['idEstado'] != EnProceso)
+        return;
+
+      //si no tiene fecha y hora de inicio se actuva manualmente
+      if(!isset($votacion['fechaHoraInicio']))
+        return;
+
+      $fechaHoraInicioVotacion = DateTime::createFromFormat(FormatoFechaHoraDB, $votacion['fechaHoraInicio'], new DateTimeZone(CostaRicaTimeZone));
+      $currenteDateTime = new Datetime('now', new DateTimeZone(CostaRicaTimeZone));
+
+      if($fechaHoraInicioVotacion > $currenteDateTime)
+        return;
+
+      //caso contrario se activa
+      $votacion['idEstado'] = Activo;
+      self::update($votacion["id"], $votacion);
     }
-}
+
+    public static function UpdateStatusVotacionActivaIfIsRequerid(&$votacion){
+      if($votacion['idEstado'] != Activo)
+        return;
+
+      //si no tiene fecha y hora de fin, se desactiva manualnente.
+      if(!isset($votacion['fechaHoraFin']))
+        return $votacion;
+
+      $fechaHoraFinVotacion = DateTime::createFromFormat(FormatoFechaHoraDB, $votacion['fechaHoraFin'], new DateTimeZone(CostaRicaTimeZone));
+      $currenteDateTime = new Datetime('now', new DateTimeZone(CostaRicaTimeZone));
+
+      //si la fecha actual es menor a la fecha de fin, no se debe desactivar
+      if($fechaHoraFinVotacion < $currenteDateTime)
+        return;
+      
+      //caso contrario se inactiva
+      $votacion['idEstado'] = Inactivo;
+      self::update($votacion["id"], $votacion);
+      return;
+    }
+
+    //este proceso debería realizarse en base de datos por medio de un proceso automático como jobs o schedules.
+    public static function AutomaticUpdateStatesVotaciones(){
+      try{
+        $votaciones = self::all();
+        if(!isset($votaciones))
+          return ["Code" => CodeSuccess, "message" => "No hay votaciones por provesar su estado."];
+
+        foreach($votaciones as $votacion){
+          self::UpdateStatusVotacionEnProcesoIfIsRequerid($votacion);
+          self::UpdateStatusVotacionActivaIfIsRequerid($votacion);
+        }
+
+        return ["Code" => CodeSuccess, "message" => "Se ha procesado el estado de las votaciones con éxito."];
+      }catch(Exception $e){
+        return ["Code" => CodeError, "message" => "No se pudo y actualizar los estados de forma automática, {$e->getMessage()}."];
+      }
+    }
 
   }
 

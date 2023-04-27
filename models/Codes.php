@@ -20,4 +20,11 @@
     const destinyEdit= 'edit';
     const destiny = 'destiny';
 
+    const EnProceso = 1;
+    const Activo = 2;
+    const Inactivo = 3;
+
+    const FormatoFechaHoraDB = 'Y-m-d\TH:i';
+    const FormatoFechaHoraCR = 'd-m-y H:i';
+    const CostaRicaTimeZone = 'America/Costa_Rica';
 ?>
