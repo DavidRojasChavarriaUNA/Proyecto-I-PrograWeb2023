@@ -3,19 +3,6 @@ SeleccionarArchivo = function(idElemento){
     elemento.click();
 }
 
-var elementoEliminar = null;
-
-EliminarVotacion = function(boton){
-    elementoEliminar = boton.closest(".filaVotacion");
-    var AccionEliminar = document.getElementById("AccionEliminar");
-    AccionEliminar.onclick = EjecutarAccionEliminar;
-}
-
-EjecutarAccionEliminar = function(){
-    elementoEliminar.remove(); 
-    elementoEliminar = null;
-}
-
 var elementoActivarDesactivar = null;
 var botonMostrar = null;
 var botonOcultar = null;

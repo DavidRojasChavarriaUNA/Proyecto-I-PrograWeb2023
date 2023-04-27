@@ -90,7 +90,8 @@
         }
         else{
           $votacion=false;
-          $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
+          //si hay un mensaje en $_GET['mensaje'] se concatena al nuevo
+          $mensaje = (!empty($mensaje)? "{$mensaje}<br>" : "") . "{$respuesta["Code"]} - {$respuesta["message"]}";
         }
 
         return view('sitioInterno/index', 
@@ -133,7 +134,13 @@
          'destiny' => destiny."=".destinyEdit,
          'user'=> $this->User]);
       }  
-
+      
+      public function destroy($id) {  
+        $respuesta = VotacionModel::DestroyVotacionWithOpciones($id);
+        $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
+        return redirect(votacionIndex."?mensaje={$mensaje}");
+      }
+      
       public function cambiarEstado($id,$idEstado) {
         if(!$this->IsAutenticated()) return $this->RedirectToLogin();
         $respuesta = VotacionModel::GetVotacionById($id);
@@ -153,5 +160,6 @@
         }
         return redirect(votacionIndex."?mensaje={$mensaje}");
       }
+      
   }
 ?>
