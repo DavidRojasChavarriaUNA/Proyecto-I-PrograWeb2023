@@ -207,12 +207,13 @@
         return;
 
       //si no tiene fecha y hora de inicio se actuva manualmente
-      if(!isset($votacion['fechaHoraInicio']))
+      if(empty($votacion['fechaHoraInicio']))
         return;
 
       $fechaHoraInicioVotacion = DateTime::createFromFormat(FormatoFechaHoraDB, $votacion['fechaHoraInicio'], new DateTimeZone(CostaRicaTimeZone));
       $currenteDateTime = new Datetime('now', new DateTimeZone(CostaRicaTimeZone));
 
+      //si la fecha y hora de inicio es mayor a la actual no debe activarse
       if($fechaHoraInicioVotacion > $currenteDateTime)
         return;
 
@@ -224,18 +225,17 @@
     public static function UpdateStatusVotacionActivaIfIsRequerid(&$votacion){
       if($votacion['idEstado'] != Activo)
         return;
-
       //si no tiene fecha y hora de fin, se desactiva manualnente.
-      if(!isset($votacion['fechaHoraFin']))
+      if(empty($votacion['fechaHoraFin']))
         return $votacion;
 
       $fechaHoraFinVotacion = DateTime::createFromFormat(FormatoFechaHoraDB, $votacion['fechaHoraFin'], new DateTimeZone(CostaRicaTimeZone));
       $currenteDateTime = new Datetime('now', new DateTimeZone(CostaRicaTimeZone));
 
-      //si la fecha actual es menor a la fecha de fin, no se debe desactivar
-      if($fechaHoraFinVotacion < $currenteDateTime)
+      //si la fecha y hora de fin es mayor a la fecha actual no debe desactivarse
+      if($fechaHoraFinVotacion > $currenteDateTime)
         return;
-      
+        
       //caso contrario se inactiva
       $votacion['idEstado'] = Inactivo;
       self::update($votacion["id"], $votacion);
