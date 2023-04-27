@@ -144,6 +144,38 @@
       }
       return ["Code" => CodeError, "message" => "No cuenta con votaciones registradas"];
     }
+
+    public static function DestroyVotacion($id){
+      $Opciones = OpcionModel::GetOpcionesByIdVotacion($id);
+      if(count($Opciones) > 0){
+          return ["Code" => CodeError, "message" => "No se puede borrar la votación, existen opciones asociadas a la votación."];
+      }
+      self::destroy($id);
+      return ["Code" => CodeSuccess, "message" => "Votación borrada con éxito."];
+    }
+
+    public static function DestroyVotacionWithOpciones($id){
+      try{
+        $respuesta = VotacionModel::GetVotacionById($id);
+        if ($respuesta["Code"] != CodeSuccess)
+          return $respuesta;
+        $votacion = $respuesta["votacion"];
+        //se debe eliminar uno por uno porque no encontré un método para eliminar con where en phpframex.
+        foreach($votacion['opciones'] as $Opcion){
+          $respuesta = OpcionModel::DestroyOpcion($Opcion['id']);
+          if ($respuesta["Code"] != CodeSuccess) {
+            $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
+            throw new Exception($mensaje);
+          }
+        }
+        $respuesta = self::DestroyVotacion($id);
+        return $respuesta;
+      }
+      catch (Exception $e) {
+          return ["Code" => CodeError, "message" => "No se pudo eliminar la votación, {$e->getMessage()}."];
+      }
+    }
+
   }
 
 ?>

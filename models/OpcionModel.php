@@ -60,6 +60,16 @@
       return $opciones;
     }
 
+    public static function DestroyOpcion($id){
+      try {
+        self::destroy($id);
+        return ["Code" => CodeSuccess, "message" => "Opción borrada con éxito."];
+      }
+      catch (Exception $e) {
+          return ["Code" => CodeError, "message" => "No se pudo borrar la opción, {$e->getMessage()}."];
+      }
+    }
+
   }
   
 ?>
