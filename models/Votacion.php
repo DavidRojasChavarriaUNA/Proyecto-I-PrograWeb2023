@@ -153,6 +153,39 @@
       return ["Code" => CodeError, "message" => "No cuenta con votaciones registradas"];
     }
 
+    public static function GetAllVotacionesPendientesVotarUser($idUser)
+    {
+      //se actualiza el estado de las votaciones
+      $respuesta = self::AutomaticUpdateStatesVotaciones();
+      //si falló se debe mostrar la respuesta
+      if ($respuesta["Code"] != CodeSuccess){
+        return $respuesta;
+      }
+      //se usa una vista para traer la descripción del estado y las votaciones pendientes de los usuarios
+      $votaciones = DB::table("vwVotacionesPendientesUsuario")->where('idUser', $idUser)->get();
+      if(!empty($votaciones)){
+        return ["Code" => CodeSuccess, "message" => "Votaciones encontradas", "votacion" => $votaciones];
+      }
+      return ["Code" => CodeError, "message" => "No cuenta con votaciones pendientes"];
+    }
+
+    public static function GetAllVotacionesInactivas()
+    {
+      //se actualiza el estado de las votaciones
+      $respuesta = self::AutomaticUpdateStatesVotaciones();
+      //si falló se debe mostrar la respuesta
+      if ($respuesta["Code"] != CodeSuccess){
+        return $respuesta;
+      }
+      //$votaciones = self::all();   
+      //se usa una vista para traer la descripción del estado
+      $votaciones = DB::table("vwVotaciones")->where('idEstado', EstadoInactivo)->get();
+      if(!empty($votaciones)){
+        return ["Code" => CodeSuccess, "message" => "Votaciones encontradas", "votacion" => $votaciones];
+      }
+      return ["Code" => CodeError, "message" => "No cuenta con votaciones finalizadas"];
+    }
+
     public static function DestroyVotacion($id){
       $Opciones = OpcionModel::GetOpcionesByIdVotacion($id);
       if(count($Opciones) > 0){

@@ -1,0 +1,32 @@
+<h2 class="text-center">Listado de votaciones finalizadas</h2>
+<div class="row">
+    <div class="col-12 text-end" style="height: 38px;">
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Apertura</th>
+                <th>Cierre</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#votacion}}
+            <tr>
+                <td>{{descripcion}}</td>
+                <td>{{estado}}</td>
+                <td>{{fechaHoraInicio}}</td>
+                <td>{{fechaHoraFin}}</td>
+                <td>
+                    <a href="/resultados/{{id}}" class="text-success accion"
+                        title="Ver resultados"><i class="bi bi-eye-fill"></i></a>      
+                </td>
+            </tr>
+            {{/votacion}}
+        </tbody>
+    </table>
+</div>

@@ -18,7 +18,7 @@
     <main id="principal" class="container">
 
       {{#isVote}}
-      {{> /votacion/votar}}
+      {{> /votante/votar}}
       {{/isVote}}
 
       {{#isCreateVote}}
@@ -28,6 +28,14 @@
       {{#showVotesManteinment}}
       {{> /votacion/index}}
       {{/showVotesManteinment}}
+
+      {{#showPendingVotes}}
+      {{> /votante/index}}
+      {{/showPendingVotes}}
+
+      {{#showVotesResults}}
+      {{> /resultados/index}}
+      {{/showVotesResults}}
 
       {{#isEditVote}}
       {{> /votacion/edit}}

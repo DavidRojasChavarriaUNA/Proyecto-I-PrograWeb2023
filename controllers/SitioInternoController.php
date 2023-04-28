@@ -13,6 +13,8 @@ class  SitioInternoController extends InternalController{
          'isVote' => false,
          'isCreateVote' => false,
          'showVotesManteinment' => false,
+         'showPendingVotes' => false,
+         'showVotesResults' => false,
          'isEditVote' => false,
          'MostrarMensaje' => false,
          'user'=> $this->User]);

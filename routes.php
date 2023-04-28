@@ -19,5 +19,11 @@
     Route::get('/votacion/estado/(:number)/(:number)','VotacionController@cambiarEstado');
     Route::get('/votacion/(:number)/desactivar','VotacionController@cambiarEstado');
     
+    Route::get('/votante', 'VotanteController@index');
+    Route::get('/votante/(:number)/votar', 'VotanteController@votar');
+
+    Route::get('/resultados', 'ResultadosController@index');
+    Route::get('/resultados/(:number)/votar', 'ResultadosController@votar');
+
     Route::dispatch();
 ?>
