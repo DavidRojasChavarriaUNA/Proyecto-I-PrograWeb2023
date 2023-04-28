@@ -144,7 +144,9 @@
       if ($respuesta["Code"] != CodeSuccess){
         return $respuesta;
       }
-      $votaciones = self::all();
+      //$votaciones = self::all();   
+      //se usa una vista para traer la descripción del estado
+      $votaciones = DB::table("vwVotaciones")->get();
       if(!empty($votaciones)){
         return ["Code" => CodeSuccess, "message" => "Votaciones encontradas", "votacion" => $votaciones];
       }
