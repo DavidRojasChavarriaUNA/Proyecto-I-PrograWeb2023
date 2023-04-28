@@ -108,6 +108,8 @@
       }
 
       public function edit($id) {
+        if(!$this->IsAutenticated()) return $this->RedirectToLogin();
+
         $respuesta = VotacionModel::GetVotacionById($id);
         if ($respuesta["Code"] == CodeSuccess) {
           $votacion = $respuesta["votacion"];
@@ -136,6 +138,8 @@
       }  
       
       public function destroy($id) {  
+        if(!$this->IsAutenticated()) return $this->RedirectToLogin();
+
         $respuesta = VotacionModel::DestroyVotacionWithOpciones($id);
         $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
         return redirect(votacionIndex."?mensaje={$mensaje}");
@@ -143,6 +147,7 @@
       
       public function cambiarEstado($id) {
         if(!$this->IsAutenticated()) return $this->RedirectToLogin();
+        
         $respuesta = VotacionModel::GetVotacionById($id);
         if ($respuesta["Code"] == CodeSuccess) { 
           $votacion = $respuesta["votacion"];
