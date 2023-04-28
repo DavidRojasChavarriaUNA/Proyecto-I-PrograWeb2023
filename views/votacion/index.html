@@ -27,18 +27,15 @@
                         data-bs-target="#modalDesactivar"><i class="bi bi-x-lg"></i></a>
                     <a id="activar{{idEstado}}" class="text-success accion" title="Activar" data-bs-toggle="modal"
                         data-bs-target="#modalActivar"><i class="bi bi-check-lg"></i></a>
-
-                    <a class="text-danger accion" title="Eliminar" data-bs-toggle="modal"                
-                        data-bs-target="#modalEliminar{{id}}">
-                        <i class="bi bi-trash"></i>
-                    </a>
+                    <a class="text-danger accion" title="Eliminar" data-bs-toggle="modal" 
+                        data-bs-target="#modalEliminar{{id}}"><i class="bi bi-trash"></i></a>
                     <a href="/votacion/{{id}}/edit" class="text-primary accion" title="Modificar"><i
                             class="bi bi-pencil"></i></a>
                     <a id="btnResultados{{id}}" href="/votaciones/resultados/{{id}}" class="text-success accion"
                         title="Ver resultados"><i class="bi bi-eye-fill"></i></a>
-                    <div id="modales{{id}}">
+                    <section id="modales{{id}}">
                         {{> /modales/modalEliminarVotacion}}
-                    </div>
+                    </section>
                     <section id="modales">
                         <!-- Modal Deactivar-->
                         <div class="modal fade" id="modalDesactivar" tabindex="-1" aria-labelledby="labelDesactivar"
