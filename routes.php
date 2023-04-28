@@ -14,9 +14,8 @@
     Route::post('/votacion/newOption', 'VotacionController@newOption');
     Route::post('/votacion/removeOption','VotacionController@removeOption');
 
-    Route::get('/votacion/edit(:number)','VotacionController@edit');  
+    Route::get('/votacion/(:number)/edit','VotacionController@edit');  
     Route::get('/votacion/(:number)/delete','VotacionController@destroy');
-    Route::get('/votacion/estado/(:number)/(:number)','VotacionController@cambiarEstado');
     Route::get('/votacion/(:number)/desactivar','VotacionController@cambiarEstado');
     
     Route::get('/votante', 'VotanteController@index');

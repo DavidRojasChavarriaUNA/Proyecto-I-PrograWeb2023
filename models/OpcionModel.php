@@ -27,22 +27,28 @@
       $descripcion = Input::get("descripcion{$index}");
       $rutaImagen = Input::get("rutaImagen{$index}");
       $idVotacion = Input::get("idVotacion{$index}");
+      $idOpc= Input::get("id{$index}");
+      $descripcionOpc = Input::get("descripcion{$index}");
       $opcion = [
         'id'=>$id, 
         'nombre' => $nombre,
         'descripcion' => $descripcion,
         'rutaImagen' => $rutaImagen,
-        'idVotacion' => $idVotacion
+        'idVotacion' => $idVotacion,
+        'idOpc' => $idOpc,
+        'descripcionOpc' => $descripcionOpc     
       ];
       return $opcion;
     }
 
     public static function CreateOpcion($opcion){
       try {
-          $Opciones = $votacion['opciones'];
+         // $Opciones = $votacion['opciones'];
           //se quitan los campos de control que no son propios de la tabla o que tienen un valor temporal
           unset($opcion['id']);
           unset($opcion['posicion']);
+          unset($opcion['idOpc']);
+          unset($opcion['descripcionOpc']);
 
           self::create($opcion);
           $id = SqLiteSequenceModel::GetLastIdentity(self::$table);
@@ -67,6 +73,20 @@
       }
       catch (Exception $e) {
           return ["Code" => CodeError, "message" => "No se pudo borrar la opción, {$e->getMessage()}."];
+      }
+    }
+
+    public static function UpdateOpcion($item){
+      try {
+        unset($item['posicion']);
+        unset($item['idOpc']);
+        unset($item['descripcionOpc']);
+        $id = $item['descripcion'];
+          self::update($item['id'], $item);
+          return ["Code" => CodeSuccess, "message" => "Opcion modificado con éxito. $id"];
+      }
+      catch (Exception $e) {
+          return ["Code" => CodeError, "message" => "No se pudo modificar la opcion, {$e->getMessage()}."];
       }
     }
 
