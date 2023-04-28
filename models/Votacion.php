@@ -123,6 +123,8 @@
             for($i = 0; $i<count($Opciones); $i++){
               $opcion = $Opciones[$i];
               $opcion['posicion'] = $i;
+              $opcion['idOpc'] = $opcion['id'];
+              $opcion['descripcionOpc'] = $opcion['descripcion'];
               array_push($votacion['opciones'], $opcion);
             }
           }
@@ -217,15 +219,32 @@
       }
     }
     
-    public static function UpdateVotacion($item){
-      try {
-          self::update($item["id"], $item);
-          return ["Code" => CodeSuccess, "message" => "Votación modificado con éxito."];
+    public static function UpdateVotacion($item)
+  {
+    try {
+      $Opciones = $item['opciones'];
+      unset($item['opciones']);
+      unset($item['totalOpciones']);
+      echo $Opciones[0]['nombre']; //
+
+      if (!empty($Opciones)) {
+        foreach ($Opciones as $Opcion) {
+          $respuesta = OpcionModel::UpdateOpcion($Opcion);
+          echo $respuesta['message'];
+          if ($respuesta["Code"] == CodeError) {
+            $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
+            throw new Exception($mensaje);
+          }
+        }
       }
-      catch (Exception $e) {
-          return ["Code" => CodeError, "message" => "No se pudo modificar la votación, {$e->getMessage()}."];
-      }
+   
+      self::update($item['id'], $item);
+      return ["Code" => CodeSuccess, "message" => "Votación modificado con éxito."];
+    } catch (Exception $e) {
+      return ["Code" => CodeError, "message" => "No se pudo modificar la votación, {$e->getMessage()}."];
     }
+  }
+
 
     public static function ChangeState($item){
       try {
