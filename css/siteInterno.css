@@ -1,33 +1,36 @@
-#logoMenu, #logoFooter {
+#logoMenu,
+#logoFooter {
     max-width: 120px;
 }
 
-#principal{
+#principal {
     min-height: 300px;
     margin-top: 88px;
 }
 
-.accion:hover, .imgChooser:hover{
+.accion:hover,
+.imgChooser:hover {
     cursor: pointer;
 }
 
-.bi:hover{
+.bi:hover {
     font-size: 1.05rem;
 }
 
-.width-100{
+.width-100 {
     width: 100%;
 }
 
-.display-none{
+.display-none {
     display: none !important;
 }
 
 
-#desactivar3{
-    display: none;
-}
-
-#activar2{
+#btnDesactivar3,
+#btnDesactivar1,
+#btn2,
+#btn3,
+#btnResultados1,
+#btnResultados2 {
     display: none;
 }

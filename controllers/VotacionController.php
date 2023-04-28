@@ -141,7 +141,7 @@
         return redirect(votacionIndex."?mensaje={$mensaje}");
       }
       
-      public function cambiarEstado($id,$idEstado) {
+      public function cambiarEstado($id) {
         if(!$this->IsAutenticated()) return $this->RedirectToLogin();
         $respuesta = VotacionModel::GetVotacionById($id);
         if ($respuesta["Code"] == CodeSuccess) { 
@@ -150,7 +150,7 @@
           $fechaHoraInicio = $votacion['fechaHoraInicio'];
           $fechaHoraFin = $votacion['fechaHoraFin'];
           $item = ['id'=>$id,
-                   'descripcion'=>$descripcion,'idEstado'=>$idEstado,
+                   'descripcion'=>$descripcion,'idEstado'=>3,
                    'fechaHoraInicio'=>$fechaHoraInicio,'fechaHoraFin'=>$fechaHoraFin];
           $respuesta = VotacionModel::ChangeState($item);
           $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";

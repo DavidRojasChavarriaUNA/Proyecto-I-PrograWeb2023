@@ -26,23 +26,13 @@
       {{/isCreateVote}}
 
       {{#showVotesManteinment}}
-      <section id="SeleccionarVotacion" class="border bg-light mt-5 p-5">
-        <article>
-          <section>
-            {{> /votacion/index}}
-          </section>
-        </article>
-      </section>
+      {{> /votacion/index}}
       {{/showVotesManteinment}}
+
       {{#isEditVote}}
-      <section id="ModificarVotacion" class="m-3">
-        <article>
-          <section>
-            {{> /votacion/edit}}
-          </section>
-        </article>
-      </section>
+      {{> /votacion/edit}}
       {{/isEditVote}}
+
       <section id="toastMensajes">
         {{#MostrarMensaje}}
         {{> /toadsAlerts/ToastAlert}}
