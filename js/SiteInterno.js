@@ -49,17 +49,3 @@ NuevaOpcion = function(idContenedorLista, boton){
     var contenedorlista = document.getElementById(idContenedorLista);
     contenedorlista.insertBefore(nuevo,elementoAlFinal);
 }
-
-const toBase64 = (file) => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
-});
-
-CargarImagen = async function(file, idImgElement, idRutaImagen){
-    let img = document.querySelector(`#${idImgElement}`);
-    let rutaImagen = document.querySelector(`#${idRutaImagen}`);
-    img.src = await toBase64(file.files[0]);
-    rutaImagen.value = img.src;
-}
