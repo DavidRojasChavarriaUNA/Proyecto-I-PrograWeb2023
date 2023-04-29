@@ -80,6 +80,7 @@
     public static function AddNewDefaultOption($votacion){
       $opcion = OpcionModel::GenerateDefaultOption($votacion['id']);
       $opcion['posicion'] = $votacion['totalOpciones'];
+      $opcion['descripcionOpc'] = $opcion['descripcion'];
       array_push($votacion['opciones'], $opcion);
       $votacion['totalOpciones']++;
       return $votacion;
