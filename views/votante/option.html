@@ -1,0 +1,28 @@
+<section class="col-md-3 border p-5">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <img src="{{rutaImagen}}" class="img-polaroid profile-img img-thumbnail " />
+    </div>
+
+    <div class="col-md-12  text-center">
+
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2 class="text-primary">
+            {{nombre}}
+          </h2>
+          <p class="fw-light">
+            {{descripcion}}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <!--este campo se envía al votar-->
+          <input type="radio" class="btn-check" name="idOpcion" id="opcion{{id}}" autocomplete="off" {{checked}}>
+          <label class="btn btn-outline-primary width-100" for="opcion{{id}}">Seleccionar</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -15,6 +15,7 @@
     const votacionCreate = "/votacion/create";
     const votacionEdit = "/votacion/%d/edit";
     const votacionIndex = "/votacion";
+    const votanteIndex = "/votante";
     
     const destinyCreate = 'create';
     const destinyEdit= 'edit';
