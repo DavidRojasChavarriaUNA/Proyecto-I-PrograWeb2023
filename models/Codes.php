@@ -30,4 +30,7 @@
     const FormatoFechaHoraDB = 'Y-m-d\TH:i';
     const FormatoFechaHoraCR = 'd-m-y H:i';
     const CostaRicaTimeZone = 'America/Costa_Rica';
+
+    const Si = "Si";
+    const No = "No";
 ?>

@@ -80,6 +80,7 @@
     public static function AddNewDefaultOption($votacion){
       $opcion = OpcionModel::GenerateDefaultOption($votacion['id']);
       $opcion['posicion'] = $votacion['totalOpciones'];
+      $opcion['descripcionOpc'] = $opcion['descripcion'];
       array_push($votacion['opciones'], $opcion);
       $votacion['totalOpciones']++;
       return $votacion;
@@ -147,6 +148,7 @@
               $opcion['posicion'] = $i;
               $opcion['idOpc'] = $opcion['id'];
               $opcion['descripcionOpc'] = $opcion['descripcion'];
+              $opcion['opcionNueva'] = No;
               if(isset($idOpcionSeleccionada) && $opcion['id'] == $idOpcionSeleccionada){
                 $opcion['isChecked'] = [true];
               }else{
@@ -255,15 +257,26 @@
       $Opciones = $item['opciones'];
       unset($item['opciones']);
       unset($item['totalOpciones']);
-      echo $Opciones[0]['nombre']; //
 
       if (!empty($Opciones)) {
         foreach ($Opciones as $Opcion) {
-          $respuesta = OpcionModel::UpdateOpcion($Opcion);
-          echo $respuesta['message'];
-          if ($respuesta["Code"] == CodeError) {
-            $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
-            throw new Exception($mensaje);
+          if($Opcion['opcionNueva'] == Si){
+            $respuesta = OpcionModel::CreateOpcion($Opcion);
+            if ($respuesta["Code"] == CodeSuccess) {
+              $Opcion['id'] = $respuesta['id'];
+            }
+            else{
+              $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
+              throw new Exception($mensaje);
+            }
+          }
+          else if($Opcion['opcionNueva'] == No){
+            $respuesta = OpcionModel::UpdateOpcion($Opcion);
+            echo $respuesta['message'];
+            if ($respuesta["Code"] == CodeError) {
+              $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
+              throw new Exception($mensaje);
+            }
           }
         }
       }
