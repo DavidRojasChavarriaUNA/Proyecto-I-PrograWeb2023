@@ -16,7 +16,8 @@
             'nombre' => "",
             'descripcion' => "",
             'rutaImagen' => RutaImagenDefault,
-            'idVotacion' => $IdVotacion
+            'idVotacion' => $IdVotacion,
+            'opcionNueva' => Si
         ];
         return $opcion;
     }
@@ -29,6 +30,7 @@
       $idVotacion = Input::get("idVotacion{$index}");
       $idOpc= Input::get("id{$index}");
       $descripcionOpc = Input::get("descripcion{$index}");
+      $opcionNueva = Input::get("opcionNueva{$index}");
       $opcion = [
         'id'=>$id, 
         'nombre' => $nombre,
@@ -36,7 +38,8 @@
         'rutaImagen' => $rutaImagen,
         'idVotacion' => $idVotacion,
         'idOpc' => $idOpc,
-        'descripcionOpc' => $descripcionOpc     
+        'descripcionOpc' => $descripcionOpc    ,
+        'opcionNueva' => $opcionNueva 
       ];
       return $opcion;
     }
@@ -49,6 +52,7 @@
           unset($opcion['posicion']);
           unset($opcion['idOpc']);
           unset($opcion['descripcionOpc']);
+          unset($opcion['opcionNueva']);
 
           self::create($opcion);
           $id = SqLiteSequenceModel::GetLastIdentity(self::$table);
@@ -66,6 +70,7 @@
         $opcion = null;
         if(!empty($opciones)){
           $opcion = $opciones[0];
+          $opcion['opcionNueva'] = No;
           return ["Code" => CodeSuccess, "message" => "Opción obtenida con éxito.", "opcion" => $opcion];
         }
         return ["Code" => CodeNotFound, "message" => "No se encontró una opción con el id: {$id}"];
@@ -96,6 +101,7 @@
         unset($item['posicion']);
         unset($item['idOpc']);
         unset($item['descripcionOpc']);
+        unset($item['opcionNueva']);
         $id = $item['descripcion'];
           self::update($item['id'], $item);
           return ["Code" => CodeSuccess, "message" => "Opcion modificado con éxito. $id"];
