@@ -1,0 +1,23 @@
+<h2 class="text-center">Listado de resultados</h2>
+<div class="row">
+    <div class="col-12 text-end" style="height: 38px;">
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Opcion</th>
+                <th>Cantidad de votos</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#resultados}}
+            <tr>
+                <td>{{opcion}}</td>
+                <td>{{cantidad}}</td>
+            </tr>
+            {{/resultados}}
+        </tbody>
+    </table>
+</div>
