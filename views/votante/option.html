@@ -18,9 +18,17 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <!--este campo se envía al votar-->
-          <input type="radio" class="btn-check" name="idOpcion" id="opcion{{id}}" autocomplete="off" {{checked}}>
-          <label class="btn btn-outline-primary width-100" for="opcion{{id}}">Seleccionar</label>
+          <form action="/votante/chooseOption" method="post">
+            <input type="hidden" value="{{id}}" name="idOpcion" />
+            <input type="hidden" value="{{idVotacion}}" name="idVotacion" />
+            {{#isChecked}}
+            <input type="radio" class="btn-check" id="radio{{id}}" autocomplete="off" checked value="{{id}}">
+            <label class="btn btn-outline-primary width-100" for="radio{{id}}">Seleccionado</label>
+            {{/isChecked}}
+            {{^isChecked}}
+            <button type="submit" class="btn btn-outline-primary width-100" value="opcion{{id}}">Seleccionar</button>
+            {{~isChecked}}
+          </form>
         </div>
       </div>
     </div>

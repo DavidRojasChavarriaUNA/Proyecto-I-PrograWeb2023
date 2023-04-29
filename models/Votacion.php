@@ -111,7 +111,7 @@
       return $votacion;
     }
 
-    public static function GetVotacionById($id){
+    public static function GetVotacionById($id, $idOpcionSeleccionada = null){
       try{
         $votaciones = self::find($id);
         $votacion = null;
@@ -124,6 +124,12 @@
               $opcion = $Opciones[$i];
               $opcion['posicion'] = $i;
               $opcion['idOpc'] = $opcion['id'];
+              $opcion['descripcionOpc'] = $opcion['descripcion'];
+              if(isset($idOpcionSeleccionada) && $opcion['id'] == $idOpcionSeleccionada){
+                $opcion['isChecked'] = [true];
+              }else{
+                $opcion['isChecked'] = [false];
+              }
               $opcion['descripcionOpc'] = $opcion['descripcion'];
               array_push($votacion['opciones'], $opcion);
             }
@@ -171,7 +177,7 @@
       return ["Code" => CodeError, "message" => "No cuenta con votaciones pendientes"];
     }
 
-    public static function GetAllVotacionesInactivas()
+    public static function GetAllVotacionesActivasEInactivas()
     {
       //se actualiza el estado de las votaciones
       $respuesta = self::AutomaticUpdateStatesVotaciones();
@@ -181,7 +187,9 @@
       }
       //$votaciones = self::all();   
       //se usa una vista para traer la descripción del estado
-      $votaciones = DB::table("vwVotaciones")->where('idEstado', EstadoInactivo)->get();
+      $votacionesActivas = DB::table("vwVotaciones")->where('idEstado', EstadoActivo)->get();
+      $votacionesInactivas = DB::table("vwVotaciones")->where('idEstado', EstadoInactivo)->get();
+      $votaciones = array_merge($votacionesActivas, $votacionesInactivas);
       if(!empty($votaciones)){
         return ["Code" => CodeSuccess, "message" => "Votaciones encontradas", "votacion" => $votaciones];
       }
