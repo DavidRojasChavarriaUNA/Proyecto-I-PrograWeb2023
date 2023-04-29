@@ -30,6 +30,13 @@
       }
     }
 
+    public static function getResultados($idVotacion){
+       $resultados = DB::table(Self::$table)->where('idVotacion', $idVotacion)->get();
+      if(!empty($resultados)){
+        return ["Code" => CodeSuccess, "message" => "Resultados encontradas", "resultados" => $resultados];
+      } 
+      return ["Code" => CodeError, "message" => "No cuenta con resultados registrados"];
+    }
   }
 
 ?>

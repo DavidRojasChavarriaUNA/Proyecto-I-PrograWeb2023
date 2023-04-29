@@ -25,6 +25,7 @@
 
     Route::get('/resultados', 'ResultadosController@index');
     Route::get('/resultados/(:number)/votar', 'ResultadosController@votar');
+    Route::get('/resultados/(:number)','ResultadosController@show');
 
     Route::dispatch();
 ?>

@@ -41,6 +41,10 @@
       {{> /votacion/edit}}
       {{/isEditVote}}
 
+      {{#resultsDetails}}
+      {{> /resultados/resultsDetails}}
+      {{/resultsDetails}}
+
       <section id="toastMensajes">
         {{#MostrarMensaje}}
         {{> /toadsAlerts/ToastAlert}}
