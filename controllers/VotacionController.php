@@ -54,12 +54,15 @@ class VotacionController extends InternalController
     //echo json_encode($file);
 
     $votacion = VotacionModel::ReadModelFromPost();
-    //echo json_encode($votacion);
+    $id = $votacion['id'];
+    echo json_encode($votacion);
     $votacion = VotacionModel::AddNewDefaultOption($votacion);
     Session::put(votacion, $votacion);
     $destiny = $_GET[destiny];
     if ($destiny == destinyCreate)
       return redirect(votacionCreate . "?GetFromSession=1&mensaje=0 - Opción agregada");
+    if ($destiny == destinyEdit)
+      return redirect(votacionEdit . "?GetFromSession=1&mensaje=0 - Opción agregada");
   }
 
   public function removeOption()
@@ -72,8 +75,10 @@ class VotacionController extends InternalController
     Session::put(votacion, $votacion);
 
     $destiny = $_GET[destiny];
-    if ($destiny == destinyCreate)
+    if ($destiny == destinyCreate){
       return redirect(votacionCreate . "?GetFromSession=1&mensaje=0 - Opción eliminada");
+    }
+      return redirect(votacionEdit . "?GetFromSession=1&mensaje=0 - Opción eliminada");
   }
 
   public function store()
@@ -130,15 +135,13 @@ class VotacionController extends InternalController
 
   public function edit($id)
   {
-    echo "HOLA";
     if (!$this->IsAutenticated())
       return $this->RedirectToLogin();
-    $opciones = null;
+
     $respuesta = VotacionModel::GetVotacionById($id);
     if ($respuesta["Code"] == CodeSuccess) {
       $votacion = $respuesta["votacion"];
       $opciones = $votacion['opciones'];
-
     } else {
       $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
       return redirect(votacionIndex . "?mensaje={$mensaje}");
