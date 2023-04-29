@@ -177,7 +177,7 @@
       return ["Code" => CodeError, "message" => "No cuenta con votaciones pendientes"];
     }
 
-    public static function GetAllVotacionesInactivas()
+    public static function GetAllVotacionesActivasEInactivas()
     {
       //se actualiza el estado de las votaciones
       $respuesta = self::AutomaticUpdateStatesVotaciones();
@@ -187,7 +187,9 @@
       }
       //$votaciones = self::all();   
       //se usa una vista para traer la descripción del estado
-      $votaciones = DB::table("vwVotaciones")->where('idEstado', EstadoInactivo)->get();
+      $votacionesActivas = DB::table("vwVotaciones")->where('idEstado', EstadoActivo)->get();
+      $votacionesInactivas = DB::table("vwVotaciones")->where('idEstado', EstadoInactivo)->get();
+      $votaciones = array_merge($votacionesActivas, $votacionesInactivas);
       if(!empty($votaciones)){
         return ["Code" => CodeSuccess, "message" => "Votaciones encontradas", "votacion" => $votaciones];
       }
