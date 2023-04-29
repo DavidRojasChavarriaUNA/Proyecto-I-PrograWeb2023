@@ -111,7 +111,7 @@
       return $votacion;
     }
 
-    public static function GetVotacionById($id){
+    public static function GetVotacionById($id, $idOpcionSeleccionada = null){
       try{
         $votaciones = self::find($id);
         $votacion = null;
@@ -124,6 +124,12 @@
               $opcion = $Opciones[$i];
               $opcion['posicion'] = $i;
               $opcion['idOpc'] = $opcion['id'];
+              $opcion['descripcionOpc'] = $opcion['descripcion'];
+              if(isset($idOpcionSeleccionada) && $opcion['id'] == $idOpcionSeleccionada){
+                $opcion['isChecked'] = [true];
+              }else{
+                $opcion['isChecked'] = [false];
+              }
               $opcion['descripcionOpc'] = $opcion['descripcion'];
               array_push($votacion['opciones'], $opcion);
             }

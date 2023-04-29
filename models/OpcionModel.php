@@ -60,6 +60,21 @@
       }
     }
 
+    public static function GetOpcionById($id){
+      try{
+        $opciones = self::find($id);
+        $opcion = null;
+        if(!empty($opciones)){
+          $opcion = $opciones[0];
+          return ["Code" => CodeSuccess, "message" => "Opción obtenida con éxito.", "opcion" => $opcion];
+        }
+        return ["Code" => CodeNotFound, "message" => "No se encontró una opción con el id: {$id}"];
+      }
+      catch (Exception $e) {
+          return ["Code" => CodeError, "message" => "No se pudo obtener la opción, {$e->getMessage()}."];
+      }
+    }
+
     public static function GetOpcionesByIdVotacion($idVotacion){
       $opciones = self::where('idVotacion',$idVotacion);
       //$opciones = DB::table(self::$table)->where('idVotacion',$idVotacion)->orderBy('id', 'ASC')->get();
