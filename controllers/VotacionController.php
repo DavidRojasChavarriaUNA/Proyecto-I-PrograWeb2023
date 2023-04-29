@@ -18,8 +18,9 @@ class VotacionController extends InternalController
     $votacion = null;
     if (isset($GetFromSession))
       $votacion = Session::get(votacion);
-    else
-      Session::forget(votacion);
+    else{
+      $this->BorrarDatosSession();
+    }
     if (!isset($votacion))
       $votacion = VotacionModel::GenerateDefaultVotacion();
     $opciones = $votacion['opciones'];
@@ -73,8 +74,28 @@ class VotacionController extends InternalController
     $destiny = $_GET[destiny];
     if ($destiny == destinyCreate)
       return redirect(votacionCreate . "?GetFromSession=1&mensaje=0 - Opción eliminada");
-    if ($destiny == destinyEdit)
+    if ($destiny == destinyEdit){
+      $this->addOpcionAEliminar($idOpcion);
       return redirect(sprintf(votacionEdit, $votacion['id']) . "?GetFromSession=1&mensaje=0 - Opción eliminada");
+    }
+  }
+
+  private function addOpcionAEliminar($idOpcion){
+    $idsOpcionesEliminar = $this->getOpcionesEliminar();
+    if(!isset($idsOpcionesEliminar))
+      $idsOpcionesEliminar = [];
+    array_push($idsOpcionesEliminar,$idOpcion);
+    Session::put(idsOpcionEliminar, $idsOpcionesEliminar);
+  }
+
+  private function getOpcionesEliminar(){
+    $idsOpcionesEliminar = Session::get(idsOpcionEliminar);
+    return $idsOpcionesEliminar;
+  }
+
+  private function BorrarDatosSession(){
+    Session::forget(votacion);
+    Session::forget(idsOpcionEliminar);
   }
 
   public function store()
@@ -87,7 +108,7 @@ class VotacionController extends InternalController
 
     $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
     if ($respuesta["Code"] == CodeSuccess) {
-      Session::forget(votacion);
+      $this->BorrarDatosSession();
       return redirect(sprintf(votacionEdit, $respuesta['id']) . "?mensaje={$mensaje}");
     } else {
       Session::put(votacion, $votacion);
@@ -97,9 +118,9 @@ class VotacionController extends InternalController
 
   public function index()
   {
-    if (!$this->IsAutenticated())
-      return $this->RedirectToLogin();
-    Session::forget(votacion);
+    if (!$this->IsAutenticated()) return $this->RedirectToLogin();
+
+    $this->BorrarDatosSession();
     $opciones = 0;
     $mensaje = $_GET['mensaje'];
     $respuesta = VotacionModel::GetAllVotaciones();
@@ -141,8 +162,9 @@ class VotacionController extends InternalController
     $votacion = null;
     if (isset($GetFromSession))
       $votacion = Session::get(votacion);
-    else
-      Session::forget(votacion);
+    else{
+      $this->BorrarDatosSession();
+    }
       
     if (!isset($votacion)){
       $respuesta = VotacionModel::GetVotacionById($id);
@@ -184,10 +206,11 @@ class VotacionController extends InternalController
       return $this->RedirectToLogin();
 
     $votacion = VotacionModel::ReadModelFromPost();
-    $respuesta = VotacionModel::UpdateVotacion($votacion);
+    $idsOpcionesEliminar = $this->getOpcionesEliminar();
+    $respuesta = VotacionModel::UpdateVotacion($votacion, $idsOpcionesEliminar);
     $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
     if ($respuesta["Code"] == CodeSuccess) {
-      Session::forget(votacion);
+      $this->BorrarDatosSession();
       return redirect(votacionIndex . "?GetFromSession=1&code={$respuesta["Code"]}&mensaje={$mensaje}");
     } else {
       Session::put(votacion, $votacion);

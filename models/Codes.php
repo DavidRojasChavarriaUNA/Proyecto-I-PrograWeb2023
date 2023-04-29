@@ -12,6 +12,7 @@
 
     const RutaImagenDefault = "/imagenes/Seleccionar imagen.png";
     const votacion = "votacion";
+    const idsOpcionEliminar = "idsOpcionEliminar";
     const opcionSeleccionada = "opcionSeleccionada";
     const votacionCreate = "/votacion/create";
     const votacionEdit = "/votacion/%d/edit";
