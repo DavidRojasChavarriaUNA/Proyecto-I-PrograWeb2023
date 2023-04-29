@@ -251,7 +251,7 @@
       }
     }
     
-    public static function UpdateVotacion($item)
+    public static function UpdateVotacion($item, $idsOpcionesEliminar = null)
   {
     try {
       $Opciones = $item['opciones'];
@@ -272,11 +272,20 @@
           }
           else if($Opcion['opcionNueva'] == No){
             $respuesta = OpcionModel::UpdateOpcion($Opcion);
-            echo $respuesta['message'];
             if ($respuesta["Code"] == CodeError) {
               $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
               throw new Exception($mensaje);
             }
+          }
+        }
+      }
+
+      if (!empty($idsOpcionesEliminar)) {
+        foreach ($idsOpcionesEliminar as $idsOpcionEliminar) {
+          $respuesta = OpcionModel::DestroyOpcion($idsOpcionEliminar);
+          if ($respuesta["Code"] != CodeSuccess) {
+            $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
+            throw new Exception($mensaje);
           }
         }
       }
