@@ -73,6 +73,21 @@ class ResultadosController extends InternalController
         }
       }
 
+      $votos = 0;
+      foreach ($ResultadosTotal as $ganadora) {
+        if ($ganadora['cantidad'] >= $votos) {
+          $votos = $ganadora['cantidad'];
+          $opcG = $ganadora['opcion'];
+        }
+      }
+
+      $masVotada = [
+        'nombreG' => $opcG
+      ];
+
+      $G = [];
+      array_push($G, $masVotada);
+
     } else {
       $resultados = null;
       $mensaje = (!empty($mensaje) ? "{$mensaje}<br>" : "") . "{$respuesta["Code"]} - {$respuesta["message"]}";
@@ -89,8 +104,9 @@ class ResultadosController extends InternalController
         'showVotesResults' => false,
         'isEditVote' => false,
         'resultsDetails' => true,
-        'votacion' =>$votacion,
+        'votacion' => $votacion,
         'resultados' => $ResultadosTotal,
+        'masVotada' => $G,
         'MostrarMensaje' => (isset($mensaje) ? ["message" => $mensaje] : false),
         'user' => $this->User
       ]

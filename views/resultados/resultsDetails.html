@@ -1,5 +1,6 @@
 <form>
     {{#votacion}}
+    {{#masVotada}}
     <h1 class="text-center">Listado de resultados</h1>
     <div class="row mb-3">
         <div class="col-12">
@@ -15,8 +16,11 @@
             <input type="datetime-local" class="form-control" value="{{fechaHoraFin}}" readonly>
         </div>
     </div>
-
-    <h3 class="text-secondary mt-5 mb-3">Resultados detallados:</h3>
+    
+    <h3 class="text-secondary mt-4 mb-4" style="text-align: center;">Resultados detallados:</h3>
+    <div class="col-6">
+        <h4>Opción más votada: {{nombreG}}</h4>
+    </div>
     <div class="container">
         <div class="row bg-white" id="ListaOpcionesModificar">
             <div class="cards mt-3 mb-5">
@@ -39,5 +43,6 @@
                 </div>
             </div>
         </div>
+        {{/masVotada}}
         {{/votacion}}
 </form>
