@@ -72,6 +72,7 @@ class ResultadosController extends InternalController
           array_push($ResultadosTotal, $opc);
         }
       }
+
     } else {
       $resultados = null;
       $mensaje = (!empty($mensaje) ? "{$mensaje}<br>" : "") . "{$respuesta["Code"]} - {$respuesta["message"]}";
@@ -88,6 +89,7 @@ class ResultadosController extends InternalController
         'showVotesResults' => false,
         'isEditVote' => false,
         'resultsDetails' => true,
+        'votacion' =>$votacion,
         'resultados' => $ResultadosTotal,
         'MostrarMensaje' => (isset($mensaje) ? ["message" => $mensaje] : false),
         'user' => $this->User

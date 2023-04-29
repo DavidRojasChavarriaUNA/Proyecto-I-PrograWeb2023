@@ -1,22 +1,43 @@
-<h2 class="text-center">Listado de resultados</h2>
+<form>
+    {{#votacion}}
+    <h1 class="text-center">Listado de resultados</h1>
+    <div class="row mb-3">
+        <div class="col-12">
+            <label class="form-label fs-3 mt-2">Titulo votación:</label>
+            <input type="text" class="form-control" value="{{descripcion}}" readonly>
+        </div>
+        <div class="col-6">
+            <label class="form-label fs-3 mt-2">Fecha y hora de apertura:</label>
+            <input type="datetime-local" class="form-control" value="{{fechaHoraInicio}}" readonly>
+        </div>
+        <div class="col-6">
+            <label class="form-label fs-3 mt-2">Fecha y hora de cierre</label>
+            <input type="datetime-local" class="form-control" value="{{fechaHoraFin}}" readonly>
+        </div>
+    </div>
 
-<div class="cards mt-5 mb-5">
-    <div class="row row-cols-3 g-4">
-        {{#resultados}}
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <img src="{{rutaImagen}}" class="card-img-top">
-                <div class="card-body">
+    <h3 class="text-secondary mt-5 mb-3">Resultados detallados:</h3>
+    <div class="container">
+        <div class="row bg-white" id="ListaOpcionesModificar">
+            <div class="cards mt-3 mb-5">
+                <div class="row row-cols-3 g-4">
+                    {{#resultados}}
                     <div class="col">
-                        <h5 class="card-title" style="text-align: center;"> {{opcion}}</h5>
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{rutaImagen}}" class="card-img-top">
+                            <div class="card-body">
+                                <div class="col">
+                                    <h5 class="card-title" style="text-align: center;"> {{opcion}}</h5>
+                                </div>
+                                <div class="col">
+                                    <p class="card-text">Cantidad de votos obtenidos: {{cantidad}}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col">
-                        <p class="card-text">Cantidad de votos obtenidos: {{cantidad}}</p>
-                    </div>
-        
+                    {{/resultados}}
                 </div>
             </div>
         </div>
-        {{/resultados}}
-      </div>    
-</div>
+        {{/votacion}}
+</form>
