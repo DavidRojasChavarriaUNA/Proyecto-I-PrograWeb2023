@@ -30,6 +30,28 @@
       return $votacion;
     }
 
+
+    public static function GenerateDefaultVotacionEdit($Opciones){
+      //generates a uniqued integer id for temporaly option
+      $id = Util::GenerateUniqueId();
+      
+      for($i = 0; $i<OpcionesPorDefecto; $i++){
+        $opcion = OpcionModel::GenerateDefaultOption($id);
+        $opcion['posicion'] = $i;
+        array_push($Opciones, $opcion);
+      }
+      $votacion = [
+          'id'=>$id, 
+          'descripcion' => "",
+          'idEstado' => EstadoEnProceso,
+          'fechaHoraInicio' => "",
+          'fechaHoraFin' => "",
+          'opciones' => $Opciones,
+          'totalOpciones' => OpcionesPorDefecto
+      ];
+      return $votacion;
+    }
+
     public static function ReadModelFromPost(){
       $id = Input::get('id');
       $descripcion = Input::get('descripcion');
