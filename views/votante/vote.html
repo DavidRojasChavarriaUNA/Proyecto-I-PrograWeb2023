@@ -1,0 +1,30 @@
+<article id="Votar" class="p-4 border bg-light">
+  {{#votacion}}
+  <h1 class="text-center mb-4">Realice su votación</h1>
+  <section class="m-3 p-3">
+    <h2 class="text-center">{{descripcion}}</h2>
+  </section>
+  {{/votacion}}
+  <div class="container">
+    <div class="row bg-white">
+      <!-- Primera opcion de voto -->
+      {{#opciones}}
+      {{> /votante/option}}
+      {{/opciones}}
+    </div>
+    <div class="d-grid gap-2 col-6 mx-auto mt-5">
+      <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+        data-bs-target="#modalConfirmarVotacion">
+        Confirmar Votación
+      </button>
+    </div>
+  </div>
+  {{#opcionSeleccionada}}
+  {{#opcionConfirmar}}
+  {{> /modales/modalConfirmarVotacion}}
+  {{/opcionConfirmar}}
+  {{/opcionSeleccionada}}
+  {{^opcionSeleccionada}}
+  {{> /modales/modalDebeSeleccionarUnaOpcion}}
+  {{~opcionSeleccionada}}
+</article>

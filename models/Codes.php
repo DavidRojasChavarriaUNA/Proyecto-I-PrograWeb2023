@@ -12,9 +12,12 @@
 
     const RutaImagenDefault = "/imagenes/Seleccionar imagen.png";
     const votacion = "votacion";
+    const opcionSeleccionada = "opcionSeleccionada";
     const votacionCreate = "/votacion/create";
     const votacionEdit = "/votacion/%d/edit";
     const votacionIndex = "/votacion";
+    const votanteIndex = "/votante";
+    const votanteVotar = "/votante/%d/votar";
     
     const destinyCreate = 'create';
     const destinyEdit= 'edit';

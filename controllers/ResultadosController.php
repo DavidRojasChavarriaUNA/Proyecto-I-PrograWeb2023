@@ -10,7 +10,7 @@
         if(!$this->IsAutenticated()) return $this->RedirectToLogin();
         $opciones = 0;
         $mensaje = $_GET['mensaje'];
-        $respuesta = VotacionModel::GetAllVotacionesInactivas($this->User['id']);
+        $respuesta = VotacionModel::GetAllVotacionesActivasEInactivas();
         if ($respuesta["Code"] == CodeSuccess) {
           $votacion = $respuesta["votacion"];
         }
