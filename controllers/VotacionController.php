@@ -49,13 +49,8 @@ class VotacionController extends InternalController
     if (!$this->IsAutenticated())
       return $this->RedirectToLogin();
 
-    //Util::ReadFile('my_file');
-    //$file = Input::file('my_file');
-    //echo json_encode($file);
-
     $votacion = VotacionModel::ReadModelFromPost();
     $id = $votacion['id'];
-    echo json_encode($votacion);
     $votacion = VotacionModel::AddNewDefaultOption($votacion);
     Session::put(votacion, $votacion);
     $destiny = $_GET[destiny];
