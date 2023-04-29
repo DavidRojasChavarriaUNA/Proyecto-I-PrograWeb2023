@@ -66,7 +66,8 @@ class ResultadosController extends InternalController
           }
           $opc = [
             'opcion' => $opcion['nombre'],
-            'cantidad' => $cantidad
+            'cantidad' => $cantidad,
+            'rutaImagen' => $opcion['rutaImagen']
           ];
           array_push($ResultadosTotal, $opc);
         }
