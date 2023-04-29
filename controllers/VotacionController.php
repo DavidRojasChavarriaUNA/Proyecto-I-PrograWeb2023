@@ -57,7 +57,7 @@ class VotacionController extends InternalController
     if ($destiny == destinyCreate)
       return redirect(votacionCreate . "?GetFromSession=1&mensaje=0 - Opción agregada");
     if ($destiny == destinyEdit)
-      return redirect(votacionEdit . "?GetFromSession=1&mensaje=0 - Opción agregada");
+      return redirect(sprintf(votacionEdit, $votacion['id']) . "?GetFromSession=1&mensaje=0 - Opción agregada");
   }
 
   public function removeOption()
@@ -70,10 +70,10 @@ class VotacionController extends InternalController
     Session::put(votacion, $votacion);
 
     $destiny = $_GET[destiny];
-    if ($destiny == destinyCreate){
+    if ($destiny == destinyCreate)
       return redirect(votacionCreate . "?GetFromSession=1&mensaje=0 - Opción eliminada");
-    }
-      return redirect(votacionEdit . "?GetFromSession=1&mensaje=0 - Opción eliminada");
+    if ($destiny == destinyEdit)
+      return redirect(sprintf(votacionEdit, $votacion['id']) . "?GetFromSession=1&mensaje=0 - Opción eliminada");
   }
 
   public function store()
@@ -98,6 +98,7 @@ class VotacionController extends InternalController
   {
     if (!$this->IsAutenticated())
       return $this->RedirectToLogin();
+    Session::forget(votacion);
     $opciones = 0;
     $mensaje = $_GET['mensaje'];
     $respuesta = VotacionModel::GetAllVotaciones();
@@ -130,18 +131,30 @@ class VotacionController extends InternalController
 
   public function edit($id)
   {
-    if (!$this->IsAutenticated())
-      return $this->RedirectToLogin();
-
-    $respuesta = VotacionModel::GetVotacionById($id);
-    if ($respuesta["Code"] == CodeSuccess) {
-      $votacion = $respuesta["votacion"];
-      $opciones = $votacion['opciones'];
-    } else {
-      $mensaje = "{$respuesta["Code"]} - {$respuesta["message"]}";
-      return redirect(votacionIndex . "?mensaje={$mensaje}");
-    }
+    if (!$this->IsAutenticated()) return $this->RedirectToLogin();
+  
+    $GetFromSession = $_GET['GetFromSession'];
     $mensaje = $_GET['mensaje'];
+  
+    $votacion = null;
+    if (isset($GetFromSession))
+      $votacion = Session::get(votacion);
+    else
+      Session::forget(votacion);
+      
+    if (!isset($votacion)){
+      $respuesta = VotacionModel::GetVotacionById($id);
+      if ($respuesta["Code"] == CodeSuccess) {
+        $votacion = $respuesta["votacion"];
+        $opciones = $votacion['opciones'];
+      } 
+      else {
+        //si hay un mensaje en $_GET['mensaje'] se concatena al nuevo
+        $mensaje = (!empty($mensaje) ? "{$mensaje}<br>" : "") . "{$respuesta["Code"]} - {$respuesta["message"]}";
+        return redirect(votacionIndex . "?mensaje={$mensaje}");
+      }
+    }
+
     return view(
       'sitioInterno/index',
       [

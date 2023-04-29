@@ -13,6 +13,8 @@
     Route::resource('/votacion', 'VotacionController');
     Route::post('/votacion/newOption', 'VotacionController@newOption');
     Route::post('/votacion/removeOption','VotacionController@removeOption');
+    Route::put('/votacion/newOption', 'VotacionController@newOption');
+    Route::put('/votacion/removeOption','VotacionController@removeOption');
 
     Route::get('/votacion/(:number)/edit','VotacionController@edit');  
     Route::get('/votacion/(:number)/delete','VotacionController@destroy');
